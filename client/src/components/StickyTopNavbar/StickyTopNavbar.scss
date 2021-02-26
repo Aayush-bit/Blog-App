@@ -1,0 +1,9 @@
+$textColor: rgb(221, 221, 221);
+
+.StickyTopNavbar a {
+    color: $textColor;
+}
+.StickyTopNavbar a:hover {
+    color: $textColor;
+    text-decoration: none;
+}
