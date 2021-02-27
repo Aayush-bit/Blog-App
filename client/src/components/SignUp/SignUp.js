@@ -22,7 +22,7 @@ function SignUp() {
     return (
         <div className="container">
             <h1 className="display-4 mb-3">Sign Up</h1>
-            <Form onSubmit={handleSignUpSubmit}>
+            <Form method="POST" onSubmit={handleSignUpSubmit}>
                 <Form.Group controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
                     <Form.Control 

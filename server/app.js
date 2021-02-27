@@ -3,12 +3,10 @@ var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const port = 5000;
-const hostname = `localhost`;
-
-
+// require Routes
 var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+var users = require('./routes/api/users/users');
+var posts = require('./routes/api/posts/posts');
 
 var app = express();
 
@@ -18,12 +16,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/api/users', users)
+app.use('/api/posts', posts)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -36,6 +36,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-app.listen(port, () => {
-  console.log(`Server running at: http://${hostname}:${port}/`)
-})
+
+module.exports = app;

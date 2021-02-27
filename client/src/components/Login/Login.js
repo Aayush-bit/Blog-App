@@ -20,7 +20,7 @@ function Login() {
     return (
         <div className="container">
             <h1 className="display-4 mb-3">Login</h1>
-            <Form onSubmit={handleLoginSubmit}>
+            <Form method="POST" onSubmit={handleLoginSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control 
