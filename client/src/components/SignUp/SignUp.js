@@ -9,12 +9,9 @@ function SignUp() {
     const [rememberMe, setRememberMe] = useState('false')
 
     const handleSignUpSubmit = (e) => {
-        const data = {
-            name: name,
-            email: email,
-            password: password,
-            rememberMe: rememberMe
-        };
+        const data = { name, email, password, rememberMe };
+
+        // instead of alerting, send a post request to the /signup route of the server
         alert(JSON.stringify(data))
         e.preventDefault();
     }

@@ -8,11 +8,8 @@ function Login() {
     const [rememberMe, setRememberMe] = useState('false')
 
     const handleLoginSubmit = (e) => {
-        const data = {
-            email: email,
-            password: password,
-            rememberMe: rememberMe
-        };
+        const data = { email, password, rememberMe };
+        // instead of alerting, send a post request to the /login route of the server
         alert(JSON.stringify(data))
         e.preventDefault();
     }
