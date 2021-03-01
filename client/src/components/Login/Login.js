@@ -1,16 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
 
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState('false')
+    const [data, setData] = useState({})
 
+    useEffect(() => {
+        if(email !== '') {
+            const url = 'http://localhost:5000/login'
+            axios.post(url, data)
+            .then(res => console.log(res.data))
+            .catch(err =>  console.error(err))
+        }
+    }, [data])
+    
     const handleLoginSubmit = (e) => {
-        const data = { email, password, rememberMe };
-        // instead of alerting, send a post request to the /login route of the server
-        alert(JSON.stringify(data))
+        setData({ email, password, rememberMe });
         e.preventDefault();
     }
     

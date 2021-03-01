@@ -1,12 +1,22 @@
 const uuid = require('uuid')
 const bcrypt = require('bcrypt')
+const genAccessToken = require('./genAccessToken')
 
 const express = require('express')
 const Router = express.Router();
 
 const usersData = require('./api/users/usersData')
 
-Router.post('/', async (req, res) => {
+const checkData = (req, res, next) => {
+    const data = req.body
+    if(data.name !== "" && data.email !== "" && data.password !== "") {
+        next()
+    } else {
+        res.status(400).send('Invalid! Please enter all the credentials')
+    }
+}
+
+Router.post('/', checkData, async (req, res) => {
     const data = req.body;
 
     // encrypt password
@@ -22,7 +32,10 @@ Router.post('/', async (req, res) => {
             following: [],
         }
         usersData.push(newUser);
-        res.json(usersData);
+
+        // generating access token
+        const accessToken = genAccessToken({name: newUser.name})
+        res.json(accessToken);
     } catch {
         res.status(500).send();
     }
