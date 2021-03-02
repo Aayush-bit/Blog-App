@@ -7,8 +7,8 @@ var logger = require('morgan');
 
 // require Routes
 var indexRouter = require('./routes/index');
-var users = require('./routes/api/users/users');
-var posts = require('./routes/api/posts/posts');
+var users = require('./routes/api/users');
+var posts = require('./routes/api/posts');
 var signUp = require('./routes/signUp');
 var login = require('./routes/login');
 

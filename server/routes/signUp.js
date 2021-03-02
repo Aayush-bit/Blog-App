@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt')
 const express = require('express')
 const Router = express.Router();
 
-const usersData = require('./api/users/usersData')
+const usersData = require('./api/data/usersData')
 const [genAccessToken, genRefreshToken] = require('./genTokens')
 
 // middleware which checks whether user has entered all the credentials

@@ -5,7 +5,11 @@ function Users() {
     const url = '/api/users'
     const [users, setUsers] = useState([])
     useEffect(() => {
-        axios.get(url)
+        axios.get(url, {
+            headers: {
+                // authorization: `Bearer ${token}`
+            }
+        })
         .then(res => setUsers(res.data))
         .catch(err => console.error(err))
     }, [])

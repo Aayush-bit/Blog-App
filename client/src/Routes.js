@@ -6,15 +6,19 @@ import Posts from './components/Posts/Posts'
 import SignUp from './components/SignUp/SignUp'
 import Users from './components/Users/Users'
 
-function Routes() {
+function Routes([token, setToken]) {
     return (
         <div>
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/posts' component={Posts} />
                 <Route exact path='/users' component={Users} />
-                <Route exact path='/login' component={Login} />
-                <Route exact path='/signup' component={SignUp} />
+                <Route exact path='/login' >
+                    <Login setToken={setToken} />
+                </Route>
+                <Route exact path='/signup' >
+                    <SignUp setToken={setToken} />
+                </Route>
             </Switch>
         </div>
     )
