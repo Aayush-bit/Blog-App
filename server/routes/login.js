@@ -1,10 +1,11 @@
 var express = require('express');
 var bcrypt = require('bcrypt');
 var router = express.Router();
-var genAccessToken = require('./genAccessToken')
+var [genAccessToken, genRefreshToken] = require('./genTokens')
 
 const usersData = require('./api/users/usersData')
 
+// middleware which checks whether user has entered all the credentials
 const checkData = (req, res, next) => {
     const data = req.body
     if(data.email !== "" && data.password !== "") {
@@ -24,8 +25,11 @@ router.post('/', checkData, async (req, res) => {
 
     try {
         if(await bcrypt.compare(data.password, user.password)) {
-            const accessToken = genAccessToken(user.name);
-            res.json(accessToken)
+            const userDataForTokens = {id: user.id ,name: user.name}
+            const accessToken = genAccessToken(userDataForTokens)
+            const refreshToken = genRefreshToken(userDataForTokens)
+            const tokens = [{"accessToken": accessToken, "refreshToken": refreshToken}];
+            res.json(tokens);
         } else {
             res.status(400).send('Incorrect password')
         }

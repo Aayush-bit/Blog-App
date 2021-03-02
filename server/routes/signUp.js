@@ -1,12 +1,13 @@
 const uuid = require('uuid')
 const bcrypt = require('bcrypt')
-const genAccessToken = require('./genAccessToken')
 
 const express = require('express')
 const Router = express.Router();
 
 const usersData = require('./api/users/usersData')
+const [genAccessToken, genRefreshToken] = require('./genTokens')
 
+// middleware which checks whether user has entered all the credentials
 const checkData = (req, res, next) => {
     const data = req.body
     if(data.name !== "" && data.email !== "" && data.password !== "") {
@@ -34,10 +35,13 @@ Router.post('/', checkData, async (req, res) => {
         usersData.push(newUser);
 
         // generating access token
-        const accessToken = genAccessToken({name: newUser.name})
-        res.json(accessToken);
+        const userDataForTokens = {id: newUser.id, name: newUser.name}
+        const accessToken = genAccessToken(userDataForTokens)
+        const refreshToken = genRefreshToken(userDataForTokens)
+        const tokens = [{"accessToken": accessToken, "refreshToken": refreshToken}];
+        res.json(tokens);
     } catch {
-        res.status(500).send();
+        res.status(500).send('server error');
     }
 })
 
