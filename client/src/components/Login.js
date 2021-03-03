@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
 
-function Login(props) {
+function Login({ setToken }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState('false')
@@ -13,7 +13,7 @@ function Login(props) {
         if(email !== '') {
             const url = 'http://localhost:5000/login'
             axios.post(url, data)
-            .then(res => props.setToken(res.data))
+            .then(res => setToken(res.data[0]))
             .catch(err =>  console.error(err))
         }
     }, [data])

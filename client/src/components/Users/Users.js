@@ -1,17 +1,19 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 
-function Users() {
+function Users({token}) {
     const url = '/api/users'
     const [users, setUsers] = useState([])
     useEffect(() => {
-        axios.get(url, {
-            headers: {
-                // authorization: `Bearer ${token}`
-            }
-        })
-        .then(res => setUsers(res.data))
-        .catch(err => console.error(err))
+        if(token && (token.length !== 0)) {
+            axios.get(url, {
+                headers: {
+                    authorization: `Bearer ${token[0].accessToken}`
+                }
+            })
+            .then(res => setUsers(res.data))
+            .catch(err => console.error(err))
+        }
     }, [])
     return (
         <div className="container">

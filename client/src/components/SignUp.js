@@ -1,20 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+// import PropTypes from 'prop-types'
+import tokenContext from '../App'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
 
-function SignUp(props) {
+function SignUp() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState('false')
     const [data, setData] = useState({})
+    const token = useContext(tokenContext)
     
     useEffect(() => {        
         if(email !== '') {
             const url = 'http://localhost:5000/signup'
             axios.post(url, data)
-            .then(res => props.setToken(res.data))
+            .then(res => {
+                console.log(res.data[0])
+            })
+            .then(res => console.log(res.data[0]))
             .catch(err =>  console.error(err))
         }
     }, [data])
@@ -75,8 +81,13 @@ function SignUp(props) {
             <p className="text-muted">
                 Already have an account? <Link to='/login'>Login</Link>
             </p>
+            {/* {JSON.stringify(token.token)} */}
         </div>
     )
 }
+
+// SignUp.propTypes = {
+//     setToken: PropTypes.func//.isRequired
+// }
 
 export default SignUp
