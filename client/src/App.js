@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import React, { useState, createContext, useEffect } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import StickyTopNavbar from './components/StickyTopNavbar/StickyTopNavbar'
 import Routes from './Routes'
@@ -9,14 +9,27 @@ export const tokenContext = createContext()
 
 function App() {
   const [token, setToken] = useState([]);
-  if(token.length === 0) { console.log('no token yet ' + token.length) }
+  const [loggedIn, setLoggedIn] = useState();
+
+  useEffect(() => {
+    setLoggedIn( (token.length !== 0) ? true : false )
+    return
+  }, [token])
+
+  const updateTokenVal = (value) => {
+    setToken(value);
+  }
+
+  console.log(`Login Status: ${loggedIn}`)
+
   return (
     <div className="App">
-      <tokenContext.Provider value={[token, setToken]} >
+      <tokenContext.Provider value={updateTokenVal} >
         <Router>
-          <StickyTopNavbar token={token} />
-          <Routes controlToken={{token, setToken}} />
+          <StickyTopNavbar />
+          <Routes />
         </Router>
+        {console.log(token)}
       </tokenContext.Provider>
     </div>
   );

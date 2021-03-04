@@ -18,9 +18,9 @@ function Users({token}) {
     return (
         <div className="container">
             <h1>Users</h1>
-            {users.map(user => (
+            {/* {users.map(user => (
                 <p key={user.id}>{user.name} {user.email} {user.followers.length} </p>
-            ))}
+            ))} */}
         </div>
     )
 }
