@@ -12,13 +12,12 @@ function SignUp() {
     const [rememberMe, setRememberMe] = useState('false')
     const [data, setData] = useState({})
     const updateTokenVal = useContext(tokenContext)
-    // console.log(updateTokenVal)
     useEffect(() => {        
         if(email !== '') {
-            const url = 'http://localhost:5000/signup'
+            const url = '/auth/signup'
             axios.post(url, data)
             .then(res => {
-                updateTokenVal(res.data[0])
+                updateTokenVal(res.data)
             })
             // .then(res => console.log(res.data[0]))
             .catch(err =>  console.error(err))

@@ -8,6 +8,7 @@ const usersData = require('./api/data/usersData')
 const [genAccessToken, genRefreshToken] = require('./genTokens')
 
 // middleware which checks whether user has entered all the credentials
+// if not then sends back an error response (400)
 const checkData = (req, res, next) => {
     const data = req.body
     if(data.name !== "" && data.email !== "" && data.password !== "") {
@@ -20,8 +21,8 @@ const checkData = (req, res, next) => {
 Router.post('/', checkData, async (req, res) => {
     const data = req.body;
 
-    // encrypt password
     try {
+        // encrypt password
         const hashedPassword = await bcrypt.hash(data.password, 10);
         // create an new user
         const newUser = {
@@ -38,7 +39,8 @@ Router.post('/', checkData, async (req, res) => {
         const userDataForTokens = {id: newUser.id, name: newUser.name}
         const accessToken = genAccessToken(userDataForTokens)
         const refreshToken = genRefreshToken(userDataForTokens)
-        const tokens = [{"accessToken": accessToken, "refreshToken": refreshToken}];
+        const tokens = {"accessToken": accessToken, "refreshToken": refreshToken};
+        res.cookie('tokens', tokens, { httpOnly: true })
         res.json(tokens);
     } catch {
         res.status(500).send('server error');

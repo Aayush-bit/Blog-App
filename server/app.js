@@ -23,8 +23,8 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/api/users', users)
 app.use('/api/posts', posts)
-app.use('/signup', signUp)
-app.use('/login', login)
+app.use('/auth/signup', signUp)
+app.use('/auth/login', login)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

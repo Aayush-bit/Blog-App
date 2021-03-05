@@ -6,6 +6,7 @@ import Login from './components/Login'
 import Posts from './components/Posts/Posts'
 import SignUp from './components/SignUp'
 import Users from './components/Users/Users'
+import NotFound404 from './components/NotFound404'
 
 function Routes({ token, setToken }) {
     return (
@@ -24,6 +25,7 @@ function Routes({ token, setToken }) {
                 <Route exact path='/signup' >
                     <SignUp setToken={setToken} />
                 </Route>
+                <Route component={NotFound404}/>
             </Switch>
         </div>
     )

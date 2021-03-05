@@ -11,7 +11,7 @@ function Login({ setToken }) {
 
     useEffect(() => {
         if(email !== '') {
-            const url = 'http://localhost:5000/login'
+            const url = '/auth/login'
             axios.post(url, data)
             .then(res => setToken(res.data[0]))
             .catch(err =>  console.error(err))

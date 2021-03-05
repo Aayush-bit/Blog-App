@@ -10,8 +10,14 @@ export const tokenContext = createContext()
 function App() {
   const [token, setToken] = useState([]);
   const [loggedIn, setLoggedIn] = useState();
-
+  // const [tokenPresent, setTokenPresent] = useState();
   useEffect(() => {
+    try {
+      console.log(`cookies present: ${document.cookie.length}`)
+    } catch {
+      console.error('some error')
+    }
+
     setLoggedIn( (token.length !== 0) ? true : false )
     return
   }, [token])
