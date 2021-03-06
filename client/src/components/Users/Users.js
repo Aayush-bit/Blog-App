@@ -5,15 +5,15 @@ function Users({token}) {
     const url = '/api/users'
     const [users, setUsers] = useState([])
     useEffect(() => {
-        if(token && (token.length !== 0)) {
-            axios.get(url, {
-                headers: {
-                    authorization: `Bearer ${token[0].accessToken}`
-                }
-            })
-            .then(res => setUsers(res.data))
-            .catch(err => console.error(err))
-        }
+        axios.get(url)
+        .then(res => console.log(res.data))
+        // .then(res => setUsers(res.data))
+        .catch(err => {
+            console.error(err)
+            if(err.response.status === 401) {
+                console.log(`Redirect to Sign Up page`)
+            }
+        })
     }, [])
     return (
         <div className="container">

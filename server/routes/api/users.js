@@ -4,8 +4,9 @@ const auth = require('./auth')
 
 // const usersData = require('./data/usersData')
 
+// responds with all the users
 Router.get('/', auth, (req, res) => {
-    res.send(req.user)
+    res.json(req.user)
 })
 
 module.exports = Router

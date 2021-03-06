@@ -35,7 +35,7 @@ function App() {
           <StickyTopNavbar />
           <Routes />
         </Router>
-        {console.log(token)}
+        {console.log(`token: ${token}`)}
       </tokenContext.Provider>
     </div>
   );

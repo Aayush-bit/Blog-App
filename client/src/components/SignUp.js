@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-// import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
 import {tokenContext} from '../App'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -16,9 +16,11 @@ function SignUp() {
         if(email !== '') {
             const url = '/auth/signup'
             axios.post(url, data)
-            .then(res => {
-                updateTokenVal(res.data)
-            })
+            .then(res => (
+                // updateTokenVal(res.data)
+                // redirect to "private" home page
+                <Redirect to='/users/' />
+            ))
             // .then(res => console.log(res.data[0]))
             .catch(err =>  console.error(err))
         }
