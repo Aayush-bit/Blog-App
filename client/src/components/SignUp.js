@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Redirect } from 'react-router-dom'
-import {tokenContext} from '../App'
+// import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
+import { LoggedInContext } from '../App'
 
 function SignUp() {
     const [name, setName] = useState('')
@@ -11,17 +11,18 @@ function SignUp() {
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState('false')
     const [data, setData] = useState({})
-    const updateTokenVal = useContext(tokenContext)
+    const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
+    
     useEffect(() => {        
-        if(email !== '') {
+        if(name !== '' && email !== '' && password !== '') {
             const url = '/auth/signup'
             axios.post(url, data)
-            .then(res => (
-                // updateTokenVal(res.data)
+            .then(res => {
+                setLoggedIn(res.data.loggedIn)
                 // redirect to "private" home page
-                <Redirect to='/users/' />
-            ))
-            // .then(res => console.log(res.data[0]))
+                // <Redirect push to='/users' />
+                console.log(`response data: ${res.data.loggedIn}`)
+            })
             .catch(err =>  console.error(err))
         }
     }, [data])
@@ -85,9 +86,5 @@ function SignUp() {
         </div>
     )
 }
-
-// SignUp.propTypes = {
-//     setToken: PropTypes.func//.isRequired
-// }
 
 export default SignUp

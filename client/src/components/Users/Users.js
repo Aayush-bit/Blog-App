@@ -1,16 +1,17 @@
 import React, {useState, useEffect} from 'react'
+import UserCard from './UserCard'
 import axios from 'axios'
 
-function Users({token}) {
+function Users() {
     const url = '/api/users'
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([]) // for storing the users data
     useEffect(() => {
         axios.get(url)
-        .then(res => console.log(res.data))
-        // .then(res => setUsers(res.data))
+        .then(res => setUsers(res.data))
         .catch(err => {
             console.error(err)
             if(err.response.status === 401) {
+                // Redirect to Sign Up page
                 console.log(`Redirect to Sign Up page`)
             }
         })
@@ -18,9 +19,16 @@ function Users({token}) {
     return (
         <div className="container">
             <h1>Users</h1>
-            {/* {users.map(user => (
-                <p key={user.id}>{user.name} {user.email} {user.followers.length} </p>
-            ))} */}
+
+            {/* send name and email to "UserCard" */}
+
+            {
+                users.map(user => (
+                    <div className="users">
+                        <UserCard key={user.id} name={user.name} email={user.email} /> 
+                    </div>
+                ))
+            }
         </div>
     )
 }

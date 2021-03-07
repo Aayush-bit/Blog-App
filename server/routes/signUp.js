@@ -25,7 +25,7 @@ Router.post('/', checkData, async (req, res) => {
         // encrypt password
         const hashedPassword = await bcrypt.hash(data.password, 10);
         
-        // create a new user
+        // create a new user and push in the array
         const newUser = {
             id: uuid.v4(),
             name: data.name,
@@ -40,14 +40,15 @@ Router.post('/', checkData, async (req, res) => {
         const userDataForTokens = {id: newUser.id, name: newUser.name}
         const accessToken = genAccessToken(userDataForTokens)
         const refreshToken = genRefreshToken(userDataForTokens)
-        const tokens = {"accessToken": accessToken, "refreshToken": refreshToken};
+        // const tokens = {"accessToken": accessToken, "refreshToken": refreshToken};
         
         // sending access token and refresh token as cookies
         res.cookie('accessToken', accessToken, { httpOnly: true })
         res.cookie('refreshToken', refreshToken, { httpOnly: true })
 
         // sending json response consisting of both the tokens
-        res.json(tokens);
+        // res.json(tokens);
+        res.json({ loggedIn: true })
     } catch {
         res.status(500).send('server error');
     }

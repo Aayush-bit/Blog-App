@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
+import { LoggedInContext } from '../App'
+// import { Redirect } from 'react-router-dom'
 
-function Login({ setToken }) {
+function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState('false')
     const [data, setData] = useState({})
+    const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
 
     useEffect(() => {
-        if(email !== '') {
+        if(email !== '' && password !== '') {
             const url = '/auth/login'
             axios.post(url, data)
-            .then(res => setToken(res.data[0]))
+            .then(res => {
+                setLoggedIn(res.data.loggedIn)
+                // redirect to "private" home page
+                // <Redirect push to='/users' />
+                console.log(`response data: ${res.data.loggedIn}`)
+            })
             .catch(err =>  console.error(err))
         }
     }, [data])

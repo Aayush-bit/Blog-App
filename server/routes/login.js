@@ -1,6 +1,6 @@
 var express = require('express');
 var bcrypt = require('bcrypt');
-var router = express.Router();
+var Router = express.Router();
 var [genAccessToken, genRefreshToken] = require('./genTokens')
 
 const usersData = require('./api/data/usersData')
@@ -16,7 +16,7 @@ const checkData = (req, res, next) => {
     }
 }
 
-router.post('/', checkData, async (req, res) => {
+Router.post('/', checkData, async (req, res) => {
     const data = req.body;
     const user = usersData.find((user) => {
         if(data.email === user.email) return user
@@ -29,8 +29,9 @@ router.post('/', checkData, async (req, res) => {
             const userDataForTokens = {id: user.id ,name: user.name}
             const accessToken = genAccessToken(userDataForTokens)
             const refreshToken = genRefreshToken(userDataForTokens)
-            const tokens = [{"accessToken": accessToken, "refreshToken": refreshToken}];
-            res.json(tokens);
+            res.cookie('accessToken', accessToken, { httpOnly: true })
+            res.cookie('refreshToken', refreshToken, { httpOnly: true })
+            res.json({ loggedIn: true });
         } else {
             res.status(400).send('Incorrect password')
         }
@@ -39,4 +40,4 @@ router.post('/', checkData, async (req, res) => {
     }    
 });
 
-module.exports = router;
+module.exports = Router;

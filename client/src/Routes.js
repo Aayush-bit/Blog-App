@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Switch, Route } from 'react-router-dom'
 import Home from './components/Home/Home'
 import Login from './components/Login'
@@ -8,31 +7,28 @@ import SignUp from './components/SignUp'
 import Users from './components/Users/Users'
 import NotFound404 from './components/NotFound404'
 
-function Routes({ token, setToken }) {
+function Routes() {
     return (
         <div>
+            {/* if the user is not logged in */}
             <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/posts'>
-                    <Posts token={token} />
+                    <Posts />
                 </Route>
                 <Route exact path='/users'>
-                    <Users token={token} />
+                    <Users />
                 </Route>
                 <Route exact path='/login' >
-                    <Login setToken={setToken} />
+                    <Login />
                 </Route>
                 <Route exact path='/signup' >
-                    <SignUp setToken={setToken} />
+                    <SignUp />
                 </Route>
                 <Route component={NotFound404}/>
             </Switch>
         </div>
     )
-}
-
-Routes.propTypes = {
-    setToken: PropTypes.func//.isRequired
 }
 
 export default Routes
