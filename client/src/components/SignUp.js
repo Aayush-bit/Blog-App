@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-// import { Redirect } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
 import { LoggedInContext } from '../App'
@@ -12,6 +11,7 @@ function SignUp() {
     const [rememberMe, setRememberMe] = useState('false')
     const [data, setData] = useState({})
     const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
+    const history = useHistory();
     
     useEffect(() => {        
         if(name !== '' && email !== '' && password !== '') {
@@ -19,9 +19,8 @@ function SignUp() {
             axios.post(url, data)
             .then(res => {
                 setLoggedIn(res.data.loggedIn)
-                // redirect to "private" home page
-                // <Redirect push to='/users' />
-                console.log(`response data: ${res.data.loggedIn}`)
+                // redirect to "private" home page once finished making
+                history.push('/users')
             })
             .catch(err =>  console.error(err))
         }

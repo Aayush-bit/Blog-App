@@ -1,37 +1,15 @@
-import React from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import React, { useContext } from 'react'
+import UnauthNavbar from './UnauthNavbar'
+import LoggedInNavbar from './LoggedInNavbar'
+import { LoggedInContext } from '../../App'
 import './StickyTopNavbar.css'
 
 function StickyTopNavbar() {
+    const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
+
     return (
         <div className="StickyTopNavbar mb-4">
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
-                <div className="container">
-                    <Navbar.Brand>
-                        <Link to="/">
-                            Blog
-                        </Link>
-                    </Navbar.Brand>
-
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="ml-auto">
-                            <div className="nav-link">
-                                <Link to="/login">
-                                    Login
-                                </Link>
-                            </div>
-
-                            <div className="nav-link">
-                                <Link to="/signup">
-                                    Sign Up
-                                </Link>
-                            </div>
-                        </Nav>
-                    </Navbar.Collapse>
-                </div>
-            </Navbar>
+            {loggedIn ? <LoggedInNavbar setLoggedIn={ setLoggedIn } /> : <UnauthNavbar /> }
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import UserCard from './UserCard'
 import axios from 'axios'
+import userImag from '../../public/potrait_man1.jpg'
 
 function Users() {
     const url = '/api/users'
@@ -18,14 +19,11 @@ function Users() {
     }, [])
     return (
         <div className="container">
-            <h1>Users</h1>
-
-            {/* send name and email to "UserCard" */}
-
+            <h1 className='display-4'>Users</h1>
             {
                 users.map(user => (
-                    <div className="users">
-                        <UserCard key={user.id} name={user.name} email={user.email} /> 
+                    <div key={user.id} className="users">
+                        <UserCard key={user.id} profileImg={userImag} name={user.name} email={user.email} /> 
                     </div>
                 ))
             }

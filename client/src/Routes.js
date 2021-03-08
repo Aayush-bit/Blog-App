@@ -12,20 +12,20 @@ function Routes() {
         <div>
             {/* if the user is not logged in */}
             <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/posts'>
+                <Route exact path={ '/' } component={ Home } />
+                <Route exact path={ '/posts' }>
                     <Posts />
                 </Route>
-                <Route exact path='/users'>
+                <Route exact path={ '/users' }>
                     <Users />
                 </Route>
-                <Route exact path='/login' >
+                <Route exact path={ '/login' }>
                     <Login />
                 </Route>
-                <Route exact path='/signup' >
+                <Route exact path={ '/signup' } >
                     <SignUp />
                 </Route>
-                <Route component={NotFound404}/>
+                <Route component={ NotFound404 }/>
             </Switch>
         </div>
     )

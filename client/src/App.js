@@ -9,13 +9,25 @@ import './App.css';
 export const LoggedInContext = createContext()
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false)  
+  // to store login status in the cookie
+  const [cookies, setCookie, deleteCookie] = useCookies(['loggedInCookie'])
   
-  // ? complete the part of storing login status in the cookie
-  const [loggedInCookie, setLoggedInCookie] = useCookies(null)
+  // "loggedIn" state will be initialized according to the value in the cookie "loggedInCookie" (if present)
+  const [loggedIn, setLoggedIn] = useState(cookies.loggedInCookie ? cookies.loggedInCookie : false)
 
+  
   useEffect(() => {
     console.log(`Log in status: ${loggedIn}`)
+
+    // to set and delete cookie on the basis of "loggedIn" state
+    if (loggedIn) {
+      setCookie('loggedInCookie', true, { path: '/' })
+    } else {
+      if (cookies.loggedInCookie) {
+        deleteCookie('loggedInCookie', { path: '/' })
+        console.log('Logged out successfully!')
+      }
+    }
   }, [loggedIn])
 
   return (
