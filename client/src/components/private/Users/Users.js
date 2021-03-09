@@ -1,29 +1,36 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
+import { useHistory } from 'react-router-dom'
 import UserCard from './UserCard'
 import axios from 'axios'
-import userImag from '../../public/potrait_man1.jpg'
+import { LoggedInContext } from '../../../App'
 
 function Users() {
-    const url = '/api/users'
     const [users, setUsers] = useState([]) // for storing the users data
+    const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
+    const history = useHistory()
+
+    const url = '/api/users'
+
     useEffect(() => {
         axios.get(url)
         .then(res => setUsers(res.data))
         .catch(err => {
             console.error(err)
             if(err.response.status === 401) {
-                // Redirect to Sign Up page
-                console.log(`Redirect to Sign Up page`)
+                // set login status to false and redirect to login page
+                setLoggedIn(false)
+                history.push('/login')            
             }
         })
     }, [])
+
     return (
         <div className="container">
             <h1 className='display-4'>Users</h1>
             {
                 users.map(user => (
                     <div key={user.id} className="users">
-                        <UserCard key={user.id} profileImg={userImag} name={user.name} email={user.email} /> 
+                        <UserCard key={user.id} name={user.name} email={user.email} /> 
                     </div>
                 ))
             }

@@ -11,6 +11,7 @@ function Login() {
     const [data, setData] = useState({})
     const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
     const history = useHistory();
+    // ! const [submitBtn, setSubmitBtn] = useState('enabled')
 
     useEffect(() => {
         if(email !== '' && password !== '') {
@@ -21,7 +22,7 @@ function Login() {
                 // redirect to "private" home page once finished making
                 history.push('/users')
             })
-            .catch(err =>  console.error(err))
+            .catch(() => window.location.reload())
         }
     }, [data])
     

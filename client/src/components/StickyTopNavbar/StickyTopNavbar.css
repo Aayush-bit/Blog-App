@@ -6,4 +6,8 @@
   color: #dddddd;
   text-decoration: none;
 }
+
+.logout-option {
+  cursor: pointer;
+}
 /*# sourceMappingURL=StickyTopNavbar.css.map */

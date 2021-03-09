@@ -19,10 +19,10 @@ function SignUp() {
             axios.post(url, data)
             .then(res => {
                 setLoggedIn(res.data.loggedIn)
-                // redirect to "private" home page once finished making
+                // ? redirect to "private" home page once finished making
                 history.push('/users')
             })
-            .catch(err =>  console.error(err))
+            .catch(() => window.location.reload())
         }
     }, [data])
 

@@ -2,8 +2,8 @@ import React from 'react'
 
 function Posts() {
     return (
-        <div>
-            <h1>Posts</h1>
+        <div className="container">
+            <h1 className="display-4">Posts</h1>
             
         </div>
     )

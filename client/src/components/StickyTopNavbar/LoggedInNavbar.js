@@ -1,11 +1,16 @@
 import React from 'react'
 import { Navbar, Nav } from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
+import axios from 'axios';
 
 function LoggedInNavbar({ setLoggedIn }) {
     const history = useHistory();
     const logoutHandler = () => {
-        // ? send request to server to log the user out
+        // send request to server to log the user out
+        axios.get('/logout')
+        .then(res => console.log(res.data))
+        .catch(err => console.error(err))
+
         setLoggedIn(false)
         // redirect to home page ( route: '/' )
         history.push('/')
@@ -16,10 +21,9 @@ function LoggedInNavbar({ setLoggedIn }) {
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
                 <div className="container">
                     <Navbar.Brand>
-                        {/* change the '/' route to some other route */}
-                        {/* <Link to="/"> */}
-                        Blog
-                        {/* </Link> */}
+                        <Link to="/">
+                            Blog
+                        </Link>
                     </Navbar.Brand>
 
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -37,8 +41,13 @@ function LoggedInNavbar({ setLoggedIn }) {
                                 </Link>
                             </div>
 
+                            <div className="nav-link">
+                                <Link to="/myprofile">
+                                    Profile
+                                </Link>
+                            </div>
                             {/* use onclick handler */}
-                            <div className="nav-link" onClick={logoutHandler} >
+                            <div className="nav-link logout-option" onClick={logoutHandler} >
                                 Logout
                             </div>
                         </Nav>
