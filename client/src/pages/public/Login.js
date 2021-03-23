@@ -2,48 +2,39 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { Form, Button } from 'react-bootstrap'
-import { LoggedInContext } from '../App'
+import { LoggedInContext } from '../../App'
 
-function SignUp() {
-    const [name, setName] = useState('')
+function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState('false')
     const [data, setData] = useState({})
     const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
     const history = useHistory();
-    
-    useEffect(() => {        
-        if(name !== '' && email !== '' && password !== '') {
-            const url = '/auth/signup'
+    // ! const [submitBtn, setSubmitBtn] = useState('enabled')
+
+    useEffect(() => {
+        if(email !== '' && password !== '') {
+            const url = '/auth/login'
             axios.post(url, data)
             .then(res => {
                 setLoggedIn(res.data.loggedIn)
-                // ? redirect to "private" home page once finished making
-                history.push('/users')
+                // redirect to "private" home page once finished making
+                history.push('/')
             })
             .catch(() => window.location.reload())
         }
     }, [data])
-
-    const handleSignUpSubmit = (e) => {
+    
+    const handleLoginSubmit = (e) => {
+        setData({ email, password, rememberMe });
         e.preventDefault();
-        setData({ name, email, password, rememberMe });
     }
     
     return (
         <div className="container">
-            <h1 className="display-4 mb-3">Sign Up</h1>
-            <Form method="POST" onSubmit={handleSignUpSubmit}>
-                <Form.Group controlId="formBasicName">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control 
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter name"
-                    required />
-                </Form.Group>
+            <h1 className="display-4 mb-3">Login</h1>
+            <Form method="POST" onSubmit={handleLoginSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control 
@@ -52,9 +43,6 @@ function SignUp() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter email"
                     required />
-                    <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
-                    </Form.Text>
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
@@ -80,10 +68,10 @@ function SignUp() {
             </Form>
             <hr/>
             <p className="text-muted">
-                Already have an account? <Link to='/login'>Login</Link>
+                New here, and willing to have an account? <Link to='/signup'>Sign Up</Link>
             </p>
         </div>
     )
 }
 
-export default SignUp
+export default Login

@@ -1,21 +1,26 @@
 import React, { useContext } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Home from './components/Home/Home'
-import Login from './components/Login'
-import SignUp from './components/SignUp'
-import NotFound404 from './components/NotFound404'
+
+// public routes
+import Home from './pages/public/Home/Home'
+import Login from './pages/public/Login'
+import SignUp from './pages/public/SignUp'
 
 // private routes
-import HomePrivate from './components/private/Home/Home'
-import Users from './components/private/Users/Users'
-import Posts from './components/private/Posts/Posts'
-import Profile from './components/private/profilePage/Profile'
+import HomePrivate from './pages/private/Home/Home'
+import Users from './pages/private/Users/Users'
+import Posts from './pages/private/Posts/Posts'
+import Profile from './pages/private/profilePage/Profile'
+
+// common routes
+import NotFound404 from './pages/NotFound404'
 
 import { LoggedInContext } from './App'
 
 function Routes() {
-    const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
+    const [loggedIn, setLoggedIn] = useContext(LoggedInContext) // declared to check in the following code whether user is logged in or not
 
+    // routes when user is not authenticated
     const unAuthRoutes = 
         <Switch>
             <Route exact path={ '/' } component={ Home } />
@@ -28,6 +33,7 @@ function Routes() {
             <Route path="*" component={ NotFound404 }/>
         </Switch>;
 
+    // routes when user is authenticated
     const loggedInRoutes = 
         <Switch>
             <Route exact path={ '/' } component={ HomePrivate } />
@@ -45,6 +51,7 @@ function Routes() {
 
     return (
         <>
+            {/* Conditional rendering for routes */}
             { loggedIn ? loggedInRoutes : unAuthRoutes }
         </>
     )

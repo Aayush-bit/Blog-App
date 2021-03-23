@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { useHistory } from 'react-router-dom'
-import UserCard from './UserCard'
+import UserCard from '../../../components/usersPage/UserCard'
 import axios from 'axios'
 import { LoggedInContext } from '../../../App'
 
