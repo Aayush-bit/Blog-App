@@ -41,7 +41,8 @@ function Routes() {
                 <Posts />
             </Route>
             <Route exact path={ '/users' }>
-                <Users />
+                {/* <Users /> */}
+                <NotFound404/>
             </Route>
             <Route exact path={ '/myprofile' }>
                 <Profile />

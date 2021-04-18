@@ -6,14 +6,17 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 // require Routes
-var indexRouter = require('./routes/index');
 var users = require('./routes/api/users');
-var posts = require('./routes/api/posts');
-var signUp = require('./routes/signUp');
-var login = require('./routes/login');
+var posts = require('./routes/api/postRoute');
+var signUp = require('./routes/api/signup/signUp');
+var login = require('./routes/api/login');
 var logout = require('./routes/logout');
+var dbConnectionFunction = require('./dbConnection');
 
 var app = express();
+
+// establishing database connection
+dbConnectionFunction();
 
 app.use(logger('dev'));
 app.use(cors());
@@ -21,7 +24,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
 app.use('/api/users', users)
 app.use('/api/posts', posts)
 app.use('/auth/signup', signUp)

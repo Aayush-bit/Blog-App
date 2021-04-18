@@ -1,6 +1,6 @@
+// OLDER version
 const uuid = require('uuid')
 const bcrypt = require('bcrypt')
-
 const express = require('express')
 const Router = express.Router();
 
@@ -23,7 +23,7 @@ Router.post('/', checkData, async (req, res) => {
 
     try {
         // encrypt password
-        const hashedPassword = await bcrypt.hash(data.password, 10);
+        const hashedPassword = await bcrypt.hash(data.password, 10); 
         
         // create a new user and push in the array
         const newUser = {

@@ -1,13 +1,60 @@
-const express = require('express')
-const Router = express.Router()
+const Router = require("express").Router();
 const auth = require('./auth')
 
-const usersData = require('./data/usersData')
+const User = require("../../model/user");
+const Post = require("../../model/post");
 
-// responds with all the users
+// ************ GET requests ************
+// to get all the users
 Router.get('/', auth, (req, res) => {
-    // res.json(req.user)
-    res.json(usersData)
-})
+    User.find({}, {password: 0})
+    .then(users => res.status(200).send(users))
+    .catch(err => res.status(500).send(err));
+});
 
-module.exports = Router
+// to get information of a particular user filtering by _id
+Router.get('/:id', (req, res) => {
+    const userId = req.params.id;
+    
+    User.findOne({ _id: userId }, { password: 0 })
+    .then(user => res.status(200).send(user))
+    .catch(err => res.status(500).send(err));
+});
+// **************************************
+
+
+// ************ PUT requests ************
+// to update information of a particular user
+Router.put('/:id', (req, res) => {
+    const userId = req.params.id;
+    const newInfo = req.body;
+
+    User.findOneAndUpdate({ _id: userId }, { $set: newInfo })
+    .then(() => res.status(200).json({ infoUpdated: true }))
+    .catch(err => res.status(500).send(err));
+});
+// **************************************
+
+
+// ************ DELETE requests ************
+
+const deleteUser = (req, res, next) => {
+    User.findOneAndDelete({ _id: req.params.id })
+    .then(() => res.status(200))
+    .catch(err => res.status(500).send(err));
+    next();
+};
+const deletePostAccount = (req, res, next) => {
+    Post.findOneAndDelete({ _id: req.params.id })
+    .then(() => res.status(200))
+    .catch(err => res.status(500).send(err));
+    next();
+};
+
+Router.delete('/:id', deleteUser, deletePostAccount, (req, res) => {
+    res.json([{ userDeleted: true }, { postAccountDeleted: true }]);
+});
+// *****************************************
+
+
+module.exports = Router;

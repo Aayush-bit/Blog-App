@@ -1,7 +1,8 @@
 const express = require('express')
+const auth = require('./auth')
 const Router = express.Router()
 
-Router.get('/', (req, res) => {
+Router.get('/', auth,(req, res) => {
     res.send(`${req.method} ${req.originalUrl}`)
 })
 

@@ -1,3 +1,4 @@
+// !! reconsider api values returned as response from server
 import React, {useState, useEffect, useContext} from 'react'
 import { useHistory } from 'react-router-dom'
 import UserCard from '../../../components/usersPage/UserCard'
