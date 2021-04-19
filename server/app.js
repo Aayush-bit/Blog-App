@@ -7,7 +7,7 @@ var logger = require('morgan');
 
 // require Routes
 var users = require('./routes/api/users');
-var posts = require('./routes/api/postRoute');
+var posts = require('./routes/api/posts');
 var signUp = require('./routes/api/signup/signUp');
 var login = require('./routes/api/login');
 var logout = require('./routes/logout');
