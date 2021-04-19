@@ -24,7 +24,7 @@ Router.post('/', checkData, userExistingCheck, createUserAccount, createUserPost
     const refreshToken = genRefreshToken(userDataForTokens)
     
     // sending access token and refresh token as cookies
-    res.cookie('accessToken', accessToken, { httpOnly: true })
+    res.setHeader('Authorization', `Bearer ${accessToken}`);
     res.cookie('refreshToken', refreshToken, { httpOnly: true })
 
     res.json({ loggedIn: true })

@@ -1,12 +1,10 @@
 const Router = require("express").Router();
-const auth = require('./auth')
-
 const User = require("../../model/user");
 const Post = require("../../model/post");
 
 // ************ GET requests ************
 // to get all the users
-Router.get('/', auth, (req, res) => {
+Router.get('/', (req, res) => {
     User.find({}, {password: 0})
     .then(users => res.status(200).send(users))
     .catch(err => res.status(500).send(err));
