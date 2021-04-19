@@ -8,8 +8,7 @@ function LoggedInNavbar({ setLoggedIn }) {
     const logoutHandler = () => {
         // send request to server to log the user out
         axios.get('/logout')
-        .then(res => console.log(res.data))
-        .catch(err => console.error(err))
+        .catch(err => console.error(err));
 
         setLoggedIn(false)
         // redirect to home page ( route: '/' )
@@ -21,7 +20,7 @@ function LoggedInNavbar({ setLoggedIn }) {
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
                 <div className="container">
                     <Navbar.Brand>
-                        <Link to="/">
+                        <Link to="/dashboard">
                             Blog
                         </Link>
                     </Navbar.Brand>

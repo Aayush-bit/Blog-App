@@ -17,15 +17,12 @@ function App() {
 
   
   useEffect(() => {
-    console.log(`Log in status: ${loggedIn}`)
-
     // to set and delete cookie on the basis of "loggedIn" state
     if (loggedIn) {
       setCookie('loggedInCookie', true, { path: '/' })
     } else {
       if (cookies.loggedInCookie) {
         deleteCookie('loggedInCookie', { path: '/' })
-        console.log('Logged out successfully!')
       }
     }
   }, [loggedIn])

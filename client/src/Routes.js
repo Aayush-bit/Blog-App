@@ -36,7 +36,7 @@ function Routes() {
     // routes when user is authenticated
     const loggedInRoutes = 
         <Switch>
-            <Route exact path={ '/' } component={ HomePrivate } />
+            <Route exact path={ '/dashboard' } component={ HomePrivate } />
             <Route exact path={ '/posts' }>
                 <Posts />
             </Route>

@@ -19,8 +19,9 @@ function Login() {
             axios.post(url, data)
             .then(res => {
                 setLoggedIn(res.data.loggedIn)
-                // redirect to "private" home page once finished making
-                history.push('/')
+                
+                // redirect to dashboard page 
+                history.push('/dashboard');
             })
             .catch(() => window.location.reload())
         }
