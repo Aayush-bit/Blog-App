@@ -18,7 +18,7 @@ Router.post('/', checkData, async (req, res) => {
     
     User.findOne({email: userData.email}, {name: 1, password: 1})
     .then(async match => {
-        if (match === null ) res.send("User doesn't exist") ;
+        if (match === null ) res.status(404).send("User doesn't exist") ;
         else {
             if(await bcrypt.compare(userData.password, match.password)) {
                 const userDataForTokens = {id: match.id ,name: match.name}
@@ -30,7 +30,7 @@ Router.post('/', checkData, async (req, res) => {
 
                 res.json({ loggedIn: true });
             } else {
-                res.status(400).send('Incorrect password')
+                res.status(401).send('Incorrect password')
             }
         };
     })
