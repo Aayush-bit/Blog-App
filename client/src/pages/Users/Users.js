@@ -4,7 +4,7 @@ import React, {useState, useEffect, useContext} from 'react'
 import { useHistory } from 'react-router-dom'
 // import UserCard from '../../../components/usersPage/UserCard'
 import axios from 'axios'
-import { LoggedInContext } from '../../../App'
+import { LoggedInContext } from '../../App'
 
 function Users() {
     const [users, setUsers] = useState([]) // for storing the users data
