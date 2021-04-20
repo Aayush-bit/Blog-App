@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Alert } from 'react-bootstrap'
 import { LoggedInContext } from '../../App'
 
 function Login() {
@@ -9,13 +9,14 @@ function Login() {
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState('false')
     const [data, setData] = useState({})
+    const [err, setErr] = useState()
     const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
     const history = useHistory();
     // ! const [submitBtn, setSubmitBtn] = useState('enabled')
 
     useEffect(() => {
         if(email !== '' && password !== '') {
-            const url = '/auth/login'
+            const url = '/auth/login';
             axios.post(url, data)
             .then(res => {
                 setLoggedIn(res.data.loggedIn)
@@ -23,7 +24,21 @@ function Login() {
                 // redirect to dashboard page 
                 history.push('/dashboard');
             })
-            .catch(() => window.location.reload())
+            .catch((resErr) => {
+                setErr(resErr.response.status);
+
+                setPassword('');
+
+                // if incorrect password entered
+                if(resErr.response.status === 401) {
+                    setPassword('');
+                }
+
+                // if the account with entered email address doesn't exist in the database
+                else if(resErr.response.status === 404) {
+                    setEmail('');
+                }
+            })
         }
     }, [data])
     
@@ -69,8 +84,26 @@ function Login() {
             </Form>
             <hr/>
             <p className="text-muted">
-                New here, and willing to have an account? <Link to='/signup'>Sign Up</Link>
+                Create a new account! <Link to='/signup'>Sign Up</Link>
             </p>
+
+            {/* Alerting the user about the error (if exists) */}
+            {
+                (err === 404) ? 
+                <>
+                    <Alert variant="danger">
+                        Account with the entered email address doesn't exist!
+                    </Alert>
+                </> : null
+            }
+            {
+                (err === 401) ? 
+                <>
+                    <Alert variant="danger">
+                        Incorrect password entered! Please try again...
+                    </Alert>
+                </> : null
+            }
         </div>
     )
 }
