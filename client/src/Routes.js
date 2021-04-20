@@ -5,10 +5,12 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './pages/public/Home/Home'
 import Login from './pages/public/Login'
 import SignUp from './pages/public/SignUp'
+import UnderConstruction from './pages/UnderConstruction'
+
 
 // private routes
 import HomePrivate from './pages/private/Home/Home'
-import Users from './pages/private/Users/Users'
+// import Users from './pages/private/Users/Users'
 import Posts from './pages/private/Posts/Posts'
 import Profile from './pages/private/profilePage/Profile'
 
@@ -41,8 +43,9 @@ function Routes() {
                 <Posts />
             </Route>
             <Route exact path={ '/users' }>
+                {/* under construction */}
                 {/* <Users /> */}
-                <NotFound404/>
+                <UnderConstruction/>
             </Route>
             <Route exact path={ '/myprofile' }>
                 <Profile />
