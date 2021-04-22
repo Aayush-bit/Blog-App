@@ -33,7 +33,7 @@ function LoggedInNavbar({ setLoggedIn }) {
                                     Posts
                                 </Link>
                             </div>
-                            
+
                             <div className="nav-link">
                                 <Link to="/users">
                                     Users
@@ -45,7 +45,7 @@ function LoggedInNavbar({ setLoggedIn }) {
                                     Profile
                                 </Link>
                             </div>
-                            {/* use onclick handler */}
+                            
                             <div className="nav-link logout-option" onClick={logoutHandler} >
                                 Logout
                             </div>
