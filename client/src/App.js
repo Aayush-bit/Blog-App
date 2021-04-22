@@ -1,9 +1,11 @@
 import React, { useEffect, createContext, useState } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
+
 import StickyTopNavbar from './components/StickyTopNavbar/StickyTopNavbar'
 import Routes from './Routes'
 import { useCookies } from 'react-cookie'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import './App.css';
 
 export const LoggedInContext = createContext()
