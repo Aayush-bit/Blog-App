@@ -8,7 +8,6 @@ function SignUp() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [rememberMe, setRememberMe] = useState('false')
     const [data, setData] = useState({})
     const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
     const history = useHistory();
@@ -28,7 +27,7 @@ function SignUp() {
 
     const handleSignUpSubmit = (e) => {
         e.preventDefault();
-        setData({ name, email, password, rememberMe });
+        setData({ name, email, password });
     }
     
     return (
@@ -65,13 +64,6 @@ function SignUp() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                     required />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check 
-                    type="checkbox"
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    label="Remember Me" />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
