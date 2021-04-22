@@ -29,17 +29,17 @@ function LoggedInNavbar({ setLoggedIn }) {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="ml-auto">
                             <div className="nav-link">
-                                <Link to="/users">
-                                    Users
-                                </Link>
-                            </div>
-
-                            <div className="nav-link">
                                 <Link to="/posts">
                                     Posts
                                 </Link>
                             </div>
-
+                            
+                            <div className="nav-link">
+                                <Link to="/users">
+                                    Users
+                                </Link>
+                            </div>
+                            
                             <div className="nav-link">
                                 <Link to="/myprofile">
                                     Profile
