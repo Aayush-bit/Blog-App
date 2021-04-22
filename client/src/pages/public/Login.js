@@ -7,7 +7,6 @@ import { LoggedInContext } from '../../App'
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [rememberMe, setRememberMe] = useState('false')
     const [data, setData] = useState({})
     const [err, setErr] = useState()
     const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
@@ -29,13 +28,8 @@ function Login() {
 
                 setPassword('');
 
-                // if incorrect password entered
-                if(resErr.response.status === 401) {
-                    setPassword('');
-                }
-
                 // if the account with entered email address doesn't exist in the database
-                else if(resErr.response.status === 404) {
+                if(resErr.response.status === 404) {
                     setEmail('');
                 }
             })
@@ -43,7 +37,7 @@ function Login() {
     }, [data])
     
     const handleLoginSubmit = (e) => {
-        setData({ email, password, rememberMe });
+        setData({ email, password });
         e.preventDefault();
     }
     
@@ -69,13 +63,6 @@ function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                     required />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check 
-                    type="checkbox"
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    label="Remember Me" />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
