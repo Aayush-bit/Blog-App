@@ -25,8 +25,10 @@ Router.post('/', checkData, async (req, res) => {
                 const accessToken = genAccessToken(userDataForTokens)
                 const refreshToken = genRefreshToken(userDataForTokens)
 
-                res.cookie('accessToken', accessToken, { httpOnly: true })
-                res.cookie('refreshToken', refreshToken, { httpOnly: true })
+                // sending access token, refresh token and userId token as cookies
+                res.cookie('accessToken', accessToken, { httpOnly: true });
+                res.cookie('refreshToken', refreshToken, { httpOnly: true });
+                res.cookie('userId', match.id, { httpOnly: false });
 
                 res.json({ loggedIn: true });
             } else {

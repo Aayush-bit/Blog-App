@@ -19,13 +19,14 @@ const checkData = (req, res, next) => {
 // '/signup/' end point
 Router.post('/', checkData, userExistingCheck, createUserAccount, createUserPostAccount, (req, res) => {
     // generating access token
-    const userDataForTokens = {id: req.user._id, name: req.user.name}
-    const accessToken = genAccessToken(userDataForTokens)
-    const refreshToken = genRefreshToken(userDataForTokens)
+    const userDataForTokens = {id: req.user._id, name: req.user.name};
+    const accessToken = genAccessToken(userDataForTokens);
+    const refreshToken = genRefreshToken(userDataForTokens);
     
-    // sending access token and refresh token as cookies
-    res.setHeader('Authorization', `Bearer ${accessToken}`);
-    res.cookie('refreshToken', refreshToken, { httpOnly: true })
+    // sending access token, refresh token and userId token as cookies
+    res.cookie('accessToken', accessToken, { httpOnly: true });
+    res.cookie('refreshToken', refreshToken, { httpOnly: true });
+    res.cookie('userId', req.user._id.toString(), { httpOnly: false });
 
     res.json({ loggedIn: true })
 });
