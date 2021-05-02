@@ -12,6 +12,7 @@ const checkCookiePresence = (req, res, next) => {
 Router.get('/', checkCookiePresence, (req, res) => {
     res.clearCookie('accessToken');
     res.clearCookie('refreshToken');
+    res.clearCookie('userId');
     res.send(`Logged out from server`);
 })
 
