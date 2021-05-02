@@ -6,3 +6,10 @@
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
 }
+
+.loader {
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
