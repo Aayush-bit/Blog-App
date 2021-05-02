@@ -1,11 +1,12 @@
 const Router = require("express").Router();
+const jwt = require('jsonwebtoken');
 const User = require("../../model/user");
 const Post = require("../../model/post");
 
 // ************ GET requests ************
 // to get all the users
 Router.get('/', (req, res) => {
-    User.find({}, {password: 0})
+    User.find({}, {password: 0, bookmarks: 0, postsLiked: 0})
     .then(users => res.status(200).send(users))
     .catch(err => res.status(500).send(err));
 });
@@ -13,8 +14,22 @@ Router.get('/', (req, res) => {
 // to get information of a particular user filtering by _id
 Router.get('/:id', (req, res) => {
     const userId = req.params.id;
-    
-    User.findOne({ _id: userId }, { password: 0 })
+
+    // check whether the user is the author 
+    const accessToken = req.cookies.accessToken;
+    if (accessToken) {
+        jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+            if(user.id === userId) {
+                // when the user is the author
+                User.findOne({ _id: userId }, { password: 0 })
+                .then(user => res.status(200).send(user))
+                .catch(err => res.status(500).send(err));            
+            }
+        })
+    }
+
+    // the user is not the author
+    User.findOne({ _id: userId }, { password: 0, bookmarks: 0, postsLiked: 0 })
     .then(user => res.status(200).send(user))
     .catch(err => res.status(500).send(err));
 });
@@ -50,7 +65,7 @@ const deletePostAccount = (req, res, next) => {
 };
 
 Router.delete('/:id', deleteUser, deletePostAccount, (req, res) => {
-    res.json([{ userDeleted: true }, { postAccountDeleted: true }]);
+    res.status(200).json([{ userDeleted: true }, { postAccountDeleted: true }]);
 });
 // *****************************************
 
