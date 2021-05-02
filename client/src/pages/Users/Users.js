@@ -1,8 +1,8 @@
 // !! reconsider api values returned as response from server
 
 import React, {useState, useEffect} from 'react'
-import Loader from "react-loader-spinner";
 import axios from 'axios'
+import PageLoader from "../../components/PageLoader"
 
 // import UserCard from '../../components/usersPage/UserCard'
 
@@ -26,16 +26,7 @@ function Users() {
             <h1 className='display-4'>Users</h1>
             {
                 isLoading ? 
-                <>
-                    <div className="loader">
-                        <Loader
-                            type="TailSpin"
-                            color="#343a40"
-                            height={70}
-                            width={70}
-                        />
-                    </div>
-                </> :
+                <PageLoader/> :
                 users.map((user, index) => (
                     <React.Fragment key={index}>
                         <hr/>
