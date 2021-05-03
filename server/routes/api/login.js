@@ -13,14 +13,14 @@ const checkData = (req, res, next) => {
     }
 }
 
-Router.post('/', checkData, async (req, res) => {
+Router.post('/', checkData, (req, res) => {
     const userData = req.body;
     
     User.findOne({email: userData.email}, {name: 1, password: 1})
-    .then(async match => {
+    .then(match => {
         if (match === null ) res.status(404).send("User doesn't exist") ;
         else {
-            if(await bcrypt.compare(userData.password, match.password)) {
+            if(bcrypt.compare(userData.password, match.password)) {
                 const userDataForTokens = {id: match.id ,name: match.name}
                 const accessToken = genAccessToken(userDataForTokens)
                 const refreshToken = genRefreshToken(userDataForTokens)
