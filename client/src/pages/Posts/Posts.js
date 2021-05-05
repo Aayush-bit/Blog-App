@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import PageLoader from "../../components/PageLoader"
+import PostCard from "../../components/postsPage/PostCard"
 
 function Posts() {
     const [posts, setPosts] = useState([]) // for storing posts data
@@ -19,22 +20,14 @@ function Posts() {
 
     return (
         <div className="container">
-            <h1 className="display-4">Posts</h1>
             {
                 isLoading ? 
                 <PageLoader /> :
-                // posts.map((postData, index) => (
-                //     (postData.posts !== []) ?
-                //     <React.Fragment key={index}>
-                //         <hr/>
-                //         {JSON.stringify(postData.posts)}
-                //         <br/>
-                //     </React.Fragment> : null
-                // ))
-                <>
-                    <p>data loaded</p>
-                    {console.log(posts)}
-                </>
+                posts.map((postData, index) => (
+                    <React.Fragment key={index}>
+                        <PostCard author={postData.author} latestPost={postData.posts[0]} />
+                    </React.Fragment>
+                ))
             }
         </div>
     )
