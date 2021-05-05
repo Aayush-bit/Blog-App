@@ -7,7 +7,7 @@ const userSchema = new Schema({
     password: {type: String, required: true}, 
     followers: {type: Array, default: []}, 
     following: {type: Array, default: []}, 
-    profileImg: {type: String, default: ""}, 
+    profileImg: {type: String, default: "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"}, 
     bio: {type: String, default: ""}, 
     postsLiked: {type: Array, default: []},
     bookmarks: {type: Array, default: []} 
