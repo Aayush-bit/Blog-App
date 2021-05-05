@@ -1,8 +1,7 @@
-// !! reconsider api values returned as response from server
-
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import PageLoader from "../../components/PageLoader"
+import UserCard from "../../components/usersPage/UserCard"
 
 // import UserCard from '../../components/usersPage/UserCard'
 
@@ -23,15 +22,12 @@ function Users() {
 
     return (
         <div className="container">
-            <h1 className='display-4'>Users</h1>
             {
                 isLoading ? 
                 <PageLoader/> :
                 users.map((user, index) => (
                     <React.Fragment key={index}>
-                        <hr/>
-                        <p>Name: {user.name}</p>
-                        <p>Email: {user.email}</p>
+                        <UserCard name={user.name} profileImg={user.profileImg} email={user.email} bio={user.bio} />
                     </React.Fragment>
                 ))
             }
