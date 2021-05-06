@@ -15,7 +15,9 @@ const PostCard = ({ author, latestPost }) => {
         <React.Fragment>
             <div className="post">
                 <div className="box">
-                    <div className="post-image"></div>
+                    <div className="post-image">
+                        <img src={latestPost.post.image.img} alt={latestPost.post.image.placeholder} className="image"/>
+                    </div>
                     {/* <div className="post-image">{latestPost.post.image.img}</div> */}
                     <div className="post-content">
                         <div className="post-title">
