@@ -8,7 +8,7 @@ const postSchema = new Schema({
         postId: mongoose.ObjectId, 
         post: {
             image: {
-                img: {type: String, default: ""}, 
+                img: {type: String, default: "https://aliceasmartialarts.com/wp-content/uploads/2017/04/default-image.jpg"}, 
                 placeholder: {type: String, default: "Image for the post"}
             },
             title: {type: String, required: true},
