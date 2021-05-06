@@ -18,7 +18,6 @@ const PostCard = ({ author, latestPost }) => {
                     <div className="post-image">
                         <img src={latestPost.post.image.img} alt={latestPost.post.image.placeholder} className="image"/>
                     </div>
-                    {/* <div className="post-image">{latestPost.post.image.img}</div> */}
                     <div className="post-content">
                         <div className="post-title">
                             {showBrief(latestPost.post.title, 50)}
