@@ -17,10 +17,10 @@ Router.post('/', checkData, (req, res) => {
     const userData = req.body;
     
     User.findOne({email: userData.email}, {name: 1, password: 1})
-    .then(match => {
+    .then(async match => {
         if (match === null ) res.status(404).send("User doesn't exist") ;
         else {
-            if(bcrypt.compare(userData.password, match.password)) {
+            if(await bcrypt.compare(userData.password, match.password)) {
                 const userDataForTokens = {id: match.id ,name: match.name}
                 const accessToken = genAccessToken(userDataForTokens)
                 const refreshToken = genRefreshToken(userDataForTokens)
