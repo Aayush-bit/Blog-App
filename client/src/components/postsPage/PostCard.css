@@ -29,6 +29,18 @@
 .post-image {
     background: rgb(228, 228, 228);
     grid-area: post-image;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+}
+
+/* ! issue with image to fit in the ".post-image" div when screen size is small */
+.image {
+    max-height: 100%;
+    /* height: auto; */
+    max-width: 100%;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    /* object-fit: cover; */
 }
 
 .post-content {
