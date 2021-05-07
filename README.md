@@ -1,6 +1,6 @@
 # Blog App
 
-This [MERN]("https://www.mongodb.com/mern-stack") project is a Blogging Application named "Blog App". It uses [JWT]("https://jwt.io/") for authentication.
+This [MERN](https://www.mongodb.com/mern-stack) project is a Blogging Application named "Blog App". It uses [JWT](https://jwt.io/) for authentication.
 The following instructions will walk you through the installation, set up, and usage of the app.
 Please go through carefully to avoid any confusions or blunders...
 All the Best!!
@@ -8,7 +8,7 @@ All the Best!!
 ## Prerequisites
 Before starting the further processes one needs to know the following: 
 
-- Should be familiar with using some VCS (like: [Git]("https://git-scm.com/")) and using [Github]("https://github.com/")
+- Should be familiar with using some VCS (like: [Git](https://git-scm.com/)) and using [Github](https://github.com/)
 - Creating a MongoDB database
 - Should not fear of the terminal window (although a step-by-step guide is provided below for your ease)
 
@@ -31,10 +31,10 @@ npm install
 
 ## Database
 
-Create a [MongoDB]("https://www.mongodb.com/") database with a relevant name (like: BloggingAppDatabase). You can use either of the following
+Create a [MongoDB](https://www.mongodb.com/) database with a relevant name (like: BloggingAppDatabase). You can use either of the following
 
-- [Local Server]("https://docs.mongodb.com/manual/") - For your database to be locally present on your device.
-- [MongoDB Atlas]("https://docs.atlas.mongodb.com/") - For your database to be present on the cloud.
+- [Local Server](https://docs.mongodb.com/manual/) - For your database to be locally present on your device.
+- [MongoDB Atlas](https://docs.atlas.mongodb.com/) - For your database to be present on the cloud.
 
 ## Set up environment
 
@@ -42,7 +42,7 @@ This project will require you to set up some environment variables.
 
 - Make a .env file in server directory
 - Enter the following environment variables into it
-- Change their values according to your needs:
+- Change their values according to your needs
 
 Environment Variables:
 
