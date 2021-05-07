@@ -6,11 +6,10 @@ Please go through carefully to avoid any confusions or blunders...
 All the Best!!
 
 ## Prerequisites
-Before starting the further processes one needs to know the following: 
+Before starting the further processes one needs to know the following 
 
-- Should be familiar with using some VCS (like: [Git](https://git-scm.com/)) and using [Github](https://github.com/)
+- Familiarity using some VCS (like: [Git](https://git-scm.com/)) and using [Github](https://github.com/)
 - Creating a MongoDB database
-- Should not fear of the terminal window (although a step-by-step guide is provided below for your ease)
 
 ## Installation
 
@@ -61,7 +60,7 @@ Here, these variables represent:
 
 - DBHOSTNAME - This is for the hostname of your database.
 
-- DBNAME - This is for the name of your database.
+- DBNAME - This is for the name of your database (example: BloggingAppDatabase).
 
 ## Usage
 
