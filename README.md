@@ -8,8 +8,9 @@ All the Best!!
 ## Prerequisites
 Before starting the further processes one needs to know the following: 
 
+- Should be familiar with using some VCS (like: [Git]("https://git-scm.com/")) and using [Github]("https://github.com/")
 - Creating a MongoDB database
-- Should not fear of the terminal window ;) (although a step-by-step guide is provided below for your ease)
+- Should not fear of the terminal window (although a step-by-step guide is provided below for your ease)
 
 ## Installation
 
