@@ -1,9 +1,15 @@
 # Blog App
 
-This [MERN]("https://www.mongodb.com/mern-stack") project is a Blogging Application named "Blog App".
+This [MERN]("https://www.mongodb.com/mern-stack") project is a Blogging Application named "Blog App". It uses [JWT]("https://jwt.io/") for authentication.
 The following instructions will walk you through the installation, set up, and usage of the app.
 Please go through carefully to avoid any confusions or blunders...
 All the Best!!
+
+## Prerequisites
+Before starting the further processes one needs to know the following: 
+
+- Creating a MongoDB database
+- Should not fear of the terminal window ;) (although a step-by-step guide is provided below for your ease)
 
 ## Installation
 
@@ -48,13 +54,13 @@ DBNAME = yourDatabaseName
 
 Here, these variables represent:
 
-- ACCESS_TOKEN_SECRET - This is the secret key of your access token and should be long, unique, like some long random string.
+- ACCESS_TOKEN_SECRET - This is for the secret key of your access token and should be some long random string(recommended).
 
-- REFRESH_TOKEN_SECRET - This is the secret key of your refresh token and should be long, unique, like some long random string.
+- REFRESH_TOKEN_SECRET - This is for the secret key of your refresh token and should be some long random string(recommended).
 
-- DBHOSTNAME - This is the hostname of your database.
+- DBHOSTNAME - This is for the hostname of your database.
 
-- DBNAME - This is the name of your database.
+- DBNAME - This is for the name of your database.
 
 ## Usage
 
