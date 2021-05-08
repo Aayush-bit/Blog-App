@@ -11,7 +11,6 @@ function Login() {
     const [err, setErr] = useState()
     const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
     const history = useHistory();
-    // ! const [submitBtn, setSubmitBtn] = useState('enabled')
 
     useEffect(() => {
         if(email !== '' && password !== '') {
@@ -74,7 +73,7 @@ function Login() {
                 Create a new account! <Link to='/signup'>Sign Up</Link>
             </p>
 
-            {/* Alerting the user about the error (if exists) */}
+            {/* Alert the user about the error (if exists) */}
             {
                 (err === 404) ? 
                 <>
