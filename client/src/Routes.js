@@ -8,11 +8,12 @@ import Login from './pages/public/Login'
 import SignUp from './pages/public/SignUp'
 import Posts from './pages/Posts/Posts'
 import Users from './pages/Users/Users'
-import MyPosts from './pages/private/MyPosts'
 
 // private 
 import HomePrivate from './pages/private/Home/Home'
 import Profile from './pages/private/profilePage/Profile'
+import MyPosts from './pages/private/MyPosts'
+import CreatePost from './pages/private/CreatePost/CreatePost'
 
 
 // common 
@@ -60,6 +61,7 @@ function Routes() {
                 <Users/>
             </Route>
             <Route path={'/myposts'} component={ MyPosts } />
+            <Route path={'/post/create'} component={ CreatePost } />
             <Route path="*" component={ NotFound404 }/>
         </Switch>;
 
