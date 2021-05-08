@@ -1,7 +1,7 @@
 const Router = require("express").Router();
 const Post = require("../../model/post");
 
-// to get posts data of a particular user filtered by id
+// get posts data of a particular user filtered by id
 Router.get('/:id', (req, res) => {
     const userId = req.params.id;
 
@@ -17,7 +17,18 @@ Router.get('/', (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
-// to add a new post
+// add a new post
+// the following is the json request format in the body
+// {
+//     "author": "name",
+//     "post": {
+//         "image": {"img": "image", "placeholder": "imagePlaceholder"},
+//         "title": "Post Title",
+//         "content": "content"
+//     },
+//     "postedOn": null
+// }
+
 Router.post('/:id', (req, res) => {
     const userId = req.params.id;
     const newPostData = req.body.post;
