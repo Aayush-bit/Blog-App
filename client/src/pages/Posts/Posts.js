@@ -25,7 +25,7 @@ function Posts() {
                 <PageLoader /> :
                 posts.map((postData, index) => (
                     <React.Fragment key={index}>
-                        <PostCard author={postData.author} latestPost={postData.posts[0]} />
+                        <PostCard author={postData.author} postData={postData.posts[0]} />
                     </React.Fragment>
                 ))
             }
