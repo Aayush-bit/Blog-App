@@ -1,24 +1,28 @@
 import React, { useContext } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-// public routes
+// ROUTES //
+// public 
 import Home from './pages/public/Home/Home'
 import Login from './pages/public/Login'
 import SignUp from './pages/public/SignUp'
 import Posts from './pages/Posts/Posts'
 import Users from './pages/Users/Users'
+import MyPosts from './pages/private/MyPosts'
 
-
-// private routes
+// private 
 import HomePrivate from './pages/private/Home/Home'
 import Profile from './pages/private/profilePage/Profile'
 
 
-// common routes
+// common 
 import NotFound404 from './pages/NotFound404'
-import UnderConstruction from './pages/UnderConstruction'
+// import UnderConstruction from './pages/UnderConstruction'
 
+
+// CONTEXTS //
 import { LoggedInContext } from './App'
+
 
 function Routes() {
     const [loggedIn, setLoggedIn] = useContext(LoggedInContext) // declared to check in the following code whether user is logged in or not
@@ -38,7 +42,6 @@ function Routes() {
             </Route>
             <Route exact path={ '/users' }>
                 <Users/>
-                {/* <UnderConstruction/> */}
             </Route>
             <Route path="*" component={ NotFound404 }/>
         </Switch>;
@@ -55,8 +58,8 @@ function Routes() {
             </Route>
             <Route exact path={ '/users' }>
                 <Users/>
-                {/* <UnderConstruction/> */}
             </Route>
+            <Route path={'/myposts'} component={ MyPosts } />
             <Route path="*" component={ NotFound404 }/>
         </Switch>;
 
