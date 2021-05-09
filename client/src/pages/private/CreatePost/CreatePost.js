@@ -2,17 +2,17 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
-import PostForm from './PostForm'
+import PostForm from '../../../components/PostRoutes/PostForm'
 
 const CreatePost = () => {
     const [postData, setPostData] = useState({});
     const [cookies] = useCookies(['userId'])
+    const [submitStatus, setSubmitStatus] = useState(false);
     const id = cookies.userId;
     const url = `/api/posts/${id}`;
     
     useEffect(() => {
-        // when there is post data
-        if(Object.keys(postData).length !== 0) {
+        if(submitStatus === true) {
             axios.post(url, postData)
             .then(res => {
                 console.log(res.data);
@@ -21,11 +21,13 @@ const CreatePost = () => {
                 console.log(resErr);
             })
         }
-    }, [postData]);
+    }, [submitStatus]);
     
     return (
         <div className="container">
-            <PostForm setPostData={setPostData} />
+            <PostForm 
+            setPostData={setPostData}
+            setSubmitStatus={setSubmitStatus} />
         </div>
     )
 }
