@@ -14,6 +14,7 @@ import HomePrivate from './pages/private/Home/Home'
 import Profile from './pages/private/profilePage/Profile'
 import MyPosts from './pages/private/MyPosts'
 import CreatePost from './pages/private/CreatePost/CreatePost'
+import EditPost from './pages/private/EditPost/EditPost'
 
 
 // common 
@@ -60,8 +61,9 @@ function Routes() {
             <Route exact path={ '/users' }>
                 <Users/>
             </Route>
-            <Route path={'/myposts'} component={ MyPosts } />
-            <Route path={'/post/create'} component={ CreatePost } />
+            <Route exact path={'/myposts'} component={ MyPosts } />
+            <Route exact path={'/post/create'} component={ CreatePost } />
+            <Route exact path={'/post/edit/:postId'} component={ EditPost } />
             <Route path="*" component={ NotFound404 }/>
         </Switch>;
 
