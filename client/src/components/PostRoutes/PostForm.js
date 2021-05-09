@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 
-const PostForm = ({ setPostData }) => {
-    const [title, setTitle] = useState("");
-    const [image, setImage] = useState("");
-    const [placeholder, setPlaceholder] = useState("");
-    const [content, setContent] = useState("");
+const PostForm = ({ setPostData, editPostData, setSubmitStatus }) => {
+    const [title, setTitle] = useState((editPostData !== undefined) ? editPostData.post.title : "");
+    const [image, setImage] = useState((editPostData !== undefined) ? editPostData.post.image.img : "");
+    const [placeholder, setPlaceholder] = useState((editPostData !== undefined) ? editPostData.post.image.placeholder : "");
+    const [content, setContent] = useState((editPostData !== undefined) ? editPostData.post.content : "");
 
     const tellCurrentDate = () => {
         let current = new Date();
@@ -18,14 +18,29 @@ const PostForm = ({ setPostData }) => {
     }
     
     const handleFormSubmit = (e) => {
-        setPostData({
-            "post": {
-                "image": {"img": image, "placeholder": placeholder},
-                "title": title,
-                "content": content
-            },
-            "postedOn": tellCurrentDate()
-        });
+        if(editPostData === undefined) {            
+            setPostData({
+                "post": {
+                    "image": {"img": image, "placeholder": placeholder},
+                    "title": title,
+                    "content": content
+                },
+                "postedOn": tellCurrentDate()
+            });
+        }
+
+        else if(editPostData !== undefined) {
+            setPostData({
+                "post": {
+                    "image": {"img": image, "placeholder": placeholder},
+                    "title": title,
+                    "content": content
+                },
+                "editedOn": tellCurrentDate()
+            });
+        }
+        
+        setSubmitStatus(true);
         e.preventDefault();
     }
     
