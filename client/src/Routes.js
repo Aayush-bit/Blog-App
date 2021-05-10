@@ -12,7 +12,7 @@ import Users from './pages/Users/Users'
 // private 
 import HomePrivate from './pages/private/Home/Home'
 import Profile from './pages/private/profilePage/Profile'
-import MyPosts from './pages/private/MyPosts'
+import MyPosts from './pages/private/MyPosts/MyPosts'
 import CreatePost from './pages/private/CreatePost/CreatePost'
 import EditPost from './pages/private/EditPost/EditPost'
 
