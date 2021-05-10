@@ -16,20 +16,31 @@ const PostCard = ({ author, postData }) => {
             <div className="post">
                 <div className="box">
                     <div className="post-image">
-                        <img src={postData.post.image.img} alt={postData.post.image.placeholder} className="image"/>
+                        <img 
+                        src={postData.post.image.img} 
+                        alt={showBrief(postData.post.image.placeholder, 20)} 
+                        className="image"/>
                     </div>
                     <div className="post-content">
                         <div className="post-title">
                             {showBrief(postData.post.title, 50)}
                         </div>
-                        <div className="post-author text-muted"><small>By- {author}</small></div>
+                        <div className="post-author text-muted">
+                            <small>By- {author}</small>
+                        </div>
                         <div className="post-brief-content">
                             {showBrief(postData.post.content, 70)}
                         </div>
                     </div>
                     <div className="post-info">
                         <div className="post-likes">{postData.likes} likes</div>
-                        <div className="post-date-time text-muted">22:10, 1-1-21</div>
+                        <div className="post-date-time text-muted">
+                            {
+                                postData.editedOn ? 
+                                postData.editedOn + " (edited)": 
+                                postData.postedOn
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
