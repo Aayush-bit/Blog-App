@@ -21,7 +21,12 @@ Router.get('/', (req, res) => {
 // get particular post of a particular user filtered by userId and postId
 const findPostByIdAndRespond = (res, postsData, postId) => {
     postsData.posts.forEach((post) => {
-        if(post._id.toString() === postId) res.status(200).json(post);
+        if(post._id.toString() === postId) res.status(200).json(
+            {
+                "author": postsData.author, 
+                "postData": post
+            }
+        );
     });
     
     res.status(404).send('post not found!');
@@ -33,7 +38,7 @@ Router.get('/:userId/:postId', (req, res) => {
 
     Post.findOne({ _id: userId })
     .then(userPosts => findPostByIdAndRespond(res, userPosts, postId))
-    .catch(err => res.status(500).send(err))
+    .catch(err => res.status(404).send(err))
 })
 
 
