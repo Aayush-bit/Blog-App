@@ -5,13 +5,17 @@ import { useParams } from 'react-router-dom'
 
 import PostForm from '../../../components/PostRoutes/PostForm'
 import PageLoader from '../../../components/PageLoader'
+import PostEdited from './PostEdited'
+import PostNotFound from './PostNotFound'
 
 const EditPost = () => {
     const [cookies] = useCookies('userId');
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState();
     const [editPostData, setEditPostData] = useState({});
     const [newPostData, setNewPostData] = useState({});
     const [submitStatus, setSubmitStatus] = useState(false);
+    const [dataEdited, setDataEdited] = useState(false);
     
     const { postId } = useParams();
     
@@ -23,27 +27,54 @@ const EditPost = () => {
             setEditPostData(res.data);
             setLoading(false)
         })
-        .catch((resErr) => console.error(resErr));
+        .catch((resErr) => {
+            setError(resErr.response.status);
+            setLoading(false)
+        });
     }, []);
 
     useEffect(() => {
         if(submitStatus === true) {
-            console.log(newPostData);
-            // * send PUT request
+            const editDataUrl = `/api/posts/edit/${cookies.userId}/${postId}`;
+
+            axios.put(editDataUrl, newPostData)
+            .then(res => {
+                if(res.data.dataEdited===true){
+                    setDataEdited(true);
+                }
+            })
+            .catch(resErr => console.log(resErr));
         }
     } , [submitStatus]);
 
-    return (
-        <div className="container">
-            <h1 className="display-4">Edit Post</h1>
-            {
-                loading ? 
-                <PageLoader/> : 
+    const showData = () => {
+        if(loading) {
+            return <PageLoader/>
+        }
+
+        if(error === 404) {
+            return <PostNotFound />
+        }
+
+        if(dataEdited) {
+            return <PostEdited />
+        }
+
+        if(!dataEdited) {
+            return (
                 <PostForm 
                 editPostData= {editPostData} 
                 setPostData={setNewPostData} 
-                setSubmitStatus={setSubmitStatus} /> 
-            }
+                setSubmitStatus={setSubmitStatus} />
+            )
+        }
+
+    }
+    
+    return (
+        <div className="container">
+            <h1 className="display-4">Edit Post</h1>
+            { showData() }
         </div>
     )
 }
