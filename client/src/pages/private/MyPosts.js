@@ -1,5 +1,3 @@
-// ! ERROR - some kind of "type error" while maping through the myPosts state
-
 import React, {useState, useEffect} from 'react'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
