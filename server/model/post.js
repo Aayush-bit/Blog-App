@@ -15,7 +15,7 @@ const postSchema = new Schema({
             content: {type: String, required: true}
         },
         likes: {type: Number, default: 0}, 
-        postedOn: Date, 
+        postedOn: {type: Date, required: true}, 
         editedOn: {type: Date, default: null}
     }]
 });
