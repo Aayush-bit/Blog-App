@@ -75,24 +75,39 @@ Router.put('/edit/:userId/:postId', authToken, (req, res) => {
     const userId = req.params.userId;
     const postId = req.params.postId;
     
-    // const editPostData = req.body.post;
+    Post.findOne({ _id: userId })
+    .then(userPosts => {
+        let targetPost;
+        let editedPosts;
 
-    // const editPost = { 
-    //     posts: [{
-    //         post: {
-    //             image: {img: newPostData.post.image.img, placeholder: newPostData.post.image.placeholder},
-    //             title: newPostData.post.title,
-    //             content: newPostData.post.content
-    //         },
-    //         postedOn: null, 
-    //     }]  
-    // };
+        userPosts.posts.forEach((requiredPost, index) => {
+            if(requiredPost._id.toString() === postId) {
+                targetPost = userPosts.posts[index].post;
+
+                const editPostData = req.body.post;
+                
+                userPosts.posts[index].post.image.img = editPostData.image.img;
+                userPosts.posts[index].post.image.placeholder = editPostData.image.placeholder;
+                userPosts.posts[index].post.title = editPostData.title;
+                userPosts.posts[index].post.content = editPostData.content;
+                userPosts.posts[index].editedOn = req.body.editedOn;
+
+                editedPosts = userPosts.posts;
+                return;
+            }
+        });
+        if (targetPost === undefined) res.status(404).send("Post Not Found!!");
+
+        return editedPosts;
+    })
+    .then((editedPosts) => {
+        Post.updateOne({ _id: userId }, { $set: { posts: editedPosts } })
+        .then(() => res.status(200).json({posted: true}))
+        .catch(err => res.status(500).send(err));
     
-    // Post.updateOne({_id: newPostData.userId}, {$push: newPost})
-    // .then(() => res.status(200).json({posted: true}))
-    // .catch(err => res.status(500).send(err));
-    
-    res.send(`userId: ${userId}\npostId: ${postId}`);
+        res.status(200).send({ "dataEdited": true });
+    })
+    .catch(err => res.status(500).send(err));
 });
 // **************************************
 
