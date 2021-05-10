@@ -10,7 +10,7 @@ import PostNotFound from './PostNotFound'
 
 const EditPost = () => {
     const [cookies] = useCookies('userId');
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
     const [editPostData, setEditPostData] = useState({});
     const [newPostData, setNewPostData] = useState({});
@@ -25,11 +25,11 @@ const EditPost = () => {
         axios.get(url)
         .then((res) => {
             setEditPostData(res.data);
-            setLoading(false)
+            setIsLoading(false)
         })
         .catch((resErr) => {
             setError(resErr.response.status);
-            setLoading(false)
+            setIsLoading(false)
         });
     }, []);
 
@@ -48,7 +48,7 @@ const EditPost = () => {
     } , [submitStatus]);
 
     const showData = () => {
-        if(loading) {
+        if(isLoading) {
             return <PageLoader/>
         }
 
