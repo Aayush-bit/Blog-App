@@ -3,6 +3,8 @@
 import React, {useState, useEffect} from 'react'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
+import PageLoader from '../../components/PageLoader'
+
 
 const MyPosts = () => {
     const [myPosts, setMyPosts] = useState([]);
@@ -23,16 +25,10 @@ const MyPosts = () => {
     return (
         <div className="container">
             <h1 className="display-4">MyPosts</h1>
-            { 
-                // typeof myPosts.posts
-                // console.log(myPosts.posts)
-                // (myPosts.posts !== null) ? 
-                // Array(myPosts.posts)
-                // .map((post) => {
-                //     <>{post}</>
-                // }) 
-                // : 
-                // <>You don't have any posts yet</>
+            {
+                isLoading ? 
+                <PageLoader/> :
+                (Object.entries(myPosts.posts).length === 0) ? <>no post present</> : <>data loaded</> 
             }
         </div>
     )
