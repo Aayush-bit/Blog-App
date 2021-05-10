@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
-import PageLoader from '../../components/PageLoader'
-
+import PageLoader from '../../../components/PageLoader'
+import PostCard from '../../../components/postsPage/PostCard'
+import NoPostsPresent  from './NoPostsPresent'
 
 const MyPosts = () => {
     const [myPosts, setMyPosts] = useState([]);
@@ -26,7 +27,8 @@ const MyPosts = () => {
             {
                 isLoading ? 
                 <PageLoader/> :
-                (Object.entries(myPosts.posts).length === 0) ? <>no post present</> : <>data loaded</> 
+                (Object.entries(myPosts.posts).length === 0) ? <NoPostsPresent /> : 
+                myPosts.posts.map((postData, index) => <PostCard author={myPosts.author} postData={postData} key={index} />)
             }
         </div>
     )
