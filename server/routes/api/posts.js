@@ -59,7 +59,7 @@ Router.post('/:id', authToken, (req, res) => {
                 title: newPostData.title,
                 content: newPostData.content
             },
-            postedOn: null, 
+            postedOn: req.body.postedOn, 
         }]  
     };
     
