@@ -6,8 +6,6 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './pages/public/Home/Home'
 import Login from './pages/public/Login'
 import SignUp from './pages/public/SignUp'
-import Posts from './pages/Posts/Posts'
-import Users from './pages/Users/Users'
 
 // private 
 import HomePrivate from './pages/private/Home/Home'
@@ -19,6 +17,9 @@ import EditPost from './pages/private/EditPost/EditPost'
 
 // common 
 import NotFound404 from './pages/NotFound404'
+import Posts from './pages/Posts/Posts'
+import Users from './pages/Users/Users'
+import FullPost from './pages/FullPost/FullPost'
 // import UnderConstruction from './pages/UnderConstruction'
 
 
@@ -45,6 +46,9 @@ function Routes() {
             <Route exact path={ '/users' }>
                 <Users/>
             </Route>
+            <Route exact path={ '/post/:userId/:postId' }>
+                <FullPost/>
+            </Route>
             <Route path="*" component={ NotFound404 }/>
         </Switch>;
 
@@ -64,6 +68,9 @@ function Routes() {
             <Route exact path={'/myposts'} component={ MyPosts } />
             <Route exact path={'/post/create'} component={ CreatePost } />
             <Route exact path={'/post/edit/:postId'} component={ EditPost } />
+            <Route exact path={ '/post/:userId/:postId' }>
+                <FullPost/>
+            </Route>
             <Route path="*" component={ NotFound404 }/>
         </Switch>;
 
