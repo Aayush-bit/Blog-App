@@ -8,7 +8,7 @@
 .box {
     cursor: pointer;
     width: 70vw;
-    min-height: 10rem;
+    height: 12rem;
     border-radius: .25rem;
     margin: 1rem 0;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.19), 0 3px 5px 0 rgba(0, 0, 0, 0.185);
