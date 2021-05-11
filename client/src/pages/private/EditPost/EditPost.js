@@ -25,7 +25,7 @@ const EditPost = () => {
         axios.get(url)
         .then((res) => {
             setEditPostData(res.data);
-            setIsLoading(false)
+            setIsLoading(false);
         })
         .catch((resErr) => {
             setError(resErr.response.status);
@@ -63,7 +63,7 @@ const EditPost = () => {
         if(!dataEdited) {
             return (
                 <PostForm 
-                editPostData= {editPostData} 
+                editPostData= {editPostData.postData} 
                 setPostData={setNewPostData} 
                 setSubmitStatus={setSubmitStatus} />
             )
