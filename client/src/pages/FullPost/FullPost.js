@@ -38,7 +38,6 @@ const FullPost = () => {
     
     return (
         <div className="container">
-            {/* <h1 className="display-4">FullPost</h1> */}
             { showData() }
         </div>
     )
