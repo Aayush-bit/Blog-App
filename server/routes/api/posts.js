@@ -19,26 +19,35 @@ Router.get('/', (req, res) => {
 });
 
 // get particular post of a particular user filtered by userId and postId
-const findPostByIdAndRespond = (res, postsData, postId) => {
-    postsData.posts.forEach((post) => {
-        if(post._id.toString() === postId) res.status(200).json(
-            {
-                "author": postsData.author, 
-                "postData": post
-            }
-        );
-    });
-    
-    res.status(404).send('post not found!');
-}
-
 Router.get('/:userId/:postId', (req, res) => {
     const userId = req.params.userId;
     const postId = req.params.postId;
 
     Post.findOne({ _id: userId })
-    .then(userPosts => findPostByIdAndRespond(res, userPosts, postId))
-    .catch(err => res.status(404).send(err))
+    .then(userPosts => {
+        let requiredPost = undefined;
+
+        userPosts.posts.forEach(post => {
+            // whether the provided post id exists in the array
+            if(post._id.toString() === postId) {
+                // when post is found
+                requiredPost = {
+                    "author": userPosts.author, 
+                    "postData": post
+                }
+            }
+        });
+        
+        // whether post was found or not?
+        if (requiredPost === undefined) {
+            // no post was found
+            res.status(404).send('Post Not Found!');    
+        }
+        
+        // respond required post
+        res.status(200).json(requiredPost);
+    })
+    .catch(err => res.status(500).send(err))
 })
 
 
