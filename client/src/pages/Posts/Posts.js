@@ -25,7 +25,14 @@ function Posts() {
                 <PageLoader /> :
                 posts.map((postData, index) => (
                     <React.Fragment key={index}>
-                        <PostCard author={postData.author} postData={postData.posts[0]} />
+                    {
+                        postData.posts[0] !== undefined ? 
+                        <PostCard 
+                        author={postData.author} 
+                        postData={postData.posts[0]} 
+                        authorId={postData._id} /> :
+                        null
+                    }
                     </React.Fragment>
                 ))
             }
