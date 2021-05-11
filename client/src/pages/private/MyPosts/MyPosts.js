@@ -28,7 +28,7 @@ const MyPosts = () => {
                 isLoading ? 
                 <PageLoader/> :
                 (Object.entries(myPosts.posts).length === 0) ? <NoPostsPresent /> : 
-                myPosts.posts.map((postData, index) => <PostCard author={myPosts.author} postData={postData} key={index} />)
+                myPosts.posts.map((postData, index) => <PostCard author={myPosts.author} postData={postData} authorId={myPosts._id} key={index} />)
             }
         </div>
     )
