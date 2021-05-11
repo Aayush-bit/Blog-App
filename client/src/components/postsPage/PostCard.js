@@ -1,7 +1,9 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import "./PostCard.css"
 
-const PostCard = ({ author, postData }) => {
+const PostCard = ({ author, postData, authorId }) => {
+    const history = useHistory()
 
     // shows breif of the entered data string
     const showBrief = (dataString, length) => {
@@ -9,17 +11,20 @@ const PostCard = ({ author, postData }) => {
         dataString.substring(0,length) + "..." : 
         dataString
     };
-
+    
+    const showFullPost = () => {
+        history.push(`/post/${authorId}/${postData._id}`);
+    }
+    
     return (
-        postData ?
         <React.Fragment>
             <div className="post">
-                <div className="box">
+                <div className="box" onClick={showFullPost}>
                     <div className="post-image">
-                        <img 
+                        {/* <img 
                         src={postData.post.image.img} 
                         alt={showBrief(postData.post.image.placeholder, 20)} 
-                        className="image"/>
+                        className="image"/> */}
                     </div>
                     <div className="post-content">
                         <div className="post-title">
@@ -44,7 +49,7 @@ const PostCard = ({ author, postData }) => {
                     </div>
                 </div>
             </div>
-        </React.Fragment> : null
+        </React.Fragment> 
     )
 }
 
