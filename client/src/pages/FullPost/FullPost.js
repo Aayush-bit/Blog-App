@@ -3,6 +3,7 @@ import {useParams} from 'react-router-dom'
 import axios from 'axios'
 
 import PageLoader from '../../components/PageLoader'
+import ShowPost from '../../components/FullPost/ShowPost'
 
 const FullPost = () => {
     const { userId, postId } = useParams()
@@ -31,16 +32,14 @@ const FullPost = () => {
             // if(error !== undefined) {
             //     return <>Error</>
             // }
-            return JSON.stringify(fullPostData);
+            return <ShowPost fullPostData={fullPostData} />;
         }
     }
     
     return (
         <div className="container">
-            <h1 className="display-4">FullPost</h1>
-            {
-                showData()
-            }
+            {/* <h1 className="display-4">FullPost</h1> */}
+            { showData() }
         </div>
     )
 }
