@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 import { Card, Button } from 'react-bootstrap'
+import { useHistory } from 'react-router';
 
-function UserCard({ name, profileImg, email, bio }) {
+function UserCard({ userId, name, profileImg, email, bio }) {
     const [isFollowing, setIsFollowing] = useState(false);
     const [followBtnVariant, setFollowBtnVariant] = useState("success");
     const [followBtnMessage, setFollowBtnMessage] = useState("Follow");
-
+    const history = useHistory();
+    
     // some brief of users bio
     const bioBrief = (bio.length >= 35) ? bio.substring(0,35) + "..." : bio;
 
@@ -22,6 +24,10 @@ function UserCard({ name, profileImg, email, bio }) {
         }
     }
 
+    const redirectToUserProfile = () => {
+        history.push(`/user/profile/${userId}`)
+    }
+
     return (
         <div>
             <Card className="mb-3" style={{ width: '18rem' }}>
@@ -31,7 +37,7 @@ function UserCard({ name, profileImg, email, bio }) {
                     <Card.Text>Email: {email}</Card.Text>
                     {bio ? <Card.Text className="text-muted">{bioBrief}</Card.Text> : null}
                     <Button variant={followBtnVariant} onClick={handleFollowStatusChange}>{followBtnMessage}</Button>
-                    <Button variant="info" className="ml-3">Profile</Button>
+                    <Button variant="info" className="ml-3" onClick={redirectToUserProfile}>Profile</Button>
                 </Card.Body>
             </Card>
         </div>
