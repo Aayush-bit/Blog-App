@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 
-const PostForm = ({ setPostData, editPostData, setSubmitStatus }) => {
+const PostForm = ({ setPostData, editPostData, setSubmitStatus, submitStatus }) => {
     const [title, setTitle] = useState((editPostData !== undefined) ? editPostData.post.title : "");
     const [image, setImage] = useState((editPostData !== undefined) ? editPostData.post.image.img : "");
     const [placeholder, setPlaceholder] = useState((editPostData !== undefined) ? editPostData.post.image.placeholder : "");
@@ -84,9 +84,21 @@ const PostForm = ({ setPostData, editPostData, setSubmitStatus }) => {
                     value={content}
                     required />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                <div className="submit">
+                    {
+                        submitStatus ? 
+                        <Button variant="primary" 
+                        type="submit" 
+                        disabled>
+                            Please Wait...
+                        </Button> :
+                        <Button 
+                        variant="primary" 
+                        type="submit">
+                            Submit
+                        </Button>
+                    }
+                </div>
             </Form>
         </div>
     )
