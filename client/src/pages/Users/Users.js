@@ -27,7 +27,12 @@ function Users() {
                 <PageLoader/> :
                 users.map((user, index) => (
                     <React.Fragment key={index}>
-                        <UserCard name={user.name} profileImg={user.profileImg} email={user.email} bio={user.bio} />
+                        <UserCard 
+                        userId={user._id} 
+                        name={user.name} 
+                        profileImg={user.profileImg} 
+                        email={user.email} 
+                        bio={user.bio} />
                     </React.Fragment>
                 ))
             }
