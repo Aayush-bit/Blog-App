@@ -2,6 +2,7 @@ const Router = require("express").Router();
 const jwt = require('jsonwebtoken');
 const User = require("../../model/user");
 const Post = require("../../model/post");
+const mongoose = require('mongoose');
 
 // ************ GET requests ************
 // to get all the users
@@ -32,6 +33,28 @@ Router.get('/:id', (req, res) => {
     User.findOne({ _id: userId }, { password: 0, bookmarks: 0, postsLiked: 0 })
     .then(user => res.status(200).send(user))
     .catch(err => res.status(500).send(err));
+});
+
+Router.get('/profile/:userId', (req, res) => {
+    const userId = req.params.userId;
+    User.aggregate([
+        {
+            $lookup: {
+                from: "posts",
+                localField: "_id",
+                foreignField: "_id",
+                as: "postsData"
+            }
+        },
+        {
+            $match: { _id: new mongoose.Types.ObjectId(userId) }
+        },
+        {
+            $project: {password: 0, bookmarks: 0, postsLiked: 0}
+        }
+    ])
+    .then(data => res.json(data))
+    .catch(err => res.send(err));
 });
 // **************************************
 
