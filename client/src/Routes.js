@@ -19,6 +19,7 @@ import EditPost from './pages/private/EditPost/EditPost'
 import NotFound404 from './pages/NotFound404'
 import Posts from './pages/Posts/Posts'
 import Users from './pages/Users/Users'
+import User from './pages/User/User'
 import FullPost from './pages/FullPost/FullPost'
 // import UnderConstruction from './pages/UnderConstruction'
 
@@ -46,6 +47,9 @@ function Routes() {
             <Route exact path={ '/users' }>
                 <Users/>
             </Route>
+            <Route exact path={ '/user/profile/:userId' }>
+                <User/>
+            </Route>
             <Route exact path={ '/post/:userId/:postId' }>
                 <FullPost/>
             </Route>
@@ -64,6 +68,9 @@ function Routes() {
             </Route>
             <Route exact path={ '/users' }>
                 <Users/>
+            </Route>
+            <Route exact path={ '/user/profile/:userId' }>
+                <User/>
             </Route>
             <Route exact path={'/myposts'} component={ MyPosts } />
             <Route exact path={'/post/create'} component={ CreatePost } />
