@@ -29,6 +29,7 @@ const CreatePost = () => {
             return(
                 <PostForm 
                 setPostData={setPostData}
+                submitStatus={submitStatus}
                 setSubmitStatus={setSubmitStatus} />
             ) 
         }

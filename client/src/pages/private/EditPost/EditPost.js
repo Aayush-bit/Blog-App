@@ -65,6 +65,7 @@ const EditPost = () => {
                 <PostForm 
                 editPostData= {editPostData.postData} 
                 setPostData={setNewPostData} 
+                submitStatus={submitStatus}
                 setSubmitStatus={setSubmitStatus} />
             )
         }
