@@ -43,7 +43,7 @@
     /* object-fit: cover; */
 }
 
-.post-content {
+.post-card-content {
     grid-area: post-content;
     margin: 1rem;
 }

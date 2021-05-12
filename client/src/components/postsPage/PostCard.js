@@ -26,7 +26,7 @@ const PostCard = ({ author, postData, authorId }) => {
                         alt={showBrief(postData.post.image.placeholder, 20)} 
                         className="image"/> */}
                     </div>
-                    <div className="post-content">
+                    <div className="post-card-content">
                         <div className="post-title">
                             {showBrief(postData.post.title, 50)}
                         </div>

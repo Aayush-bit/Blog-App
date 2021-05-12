@@ -29,7 +29,9 @@ const ShowPost = ({ fullPostData }) => {
                 </p>
             </div>
 
-            <p className="post-content">{fullPostData.postData.post.content}</p>
+            <p className="post-content">
+                {fullPostData.postData.post.content}
+            </p>
 
             <div className="like-bookmark">
                 <div className="like mr-4">
