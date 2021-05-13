@@ -32,7 +32,7 @@ const FullPost = () => {
             // if(error !== undefined) {
             //     return <>Error</>
             // }
-            return <ShowPost fullPostData={fullPostData} />;
+            return <ShowPost fullPostData={fullPostData} userId={userId} />;
         }
     }
     
