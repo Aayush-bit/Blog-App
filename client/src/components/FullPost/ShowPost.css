@@ -1,4 +1,4 @@
-.like-bookmark {
+.icons {
     display: flex;
 }
 
@@ -10,4 +10,13 @@
 .author-date {
     display: flex;
     justify-content: space-between;
+}
+
+.fullProfileLink {
+    /* color: black; */
+    text-decoration: underline;
+}
+
+.fullProfileLink:hover {
+    text-decoration: none;
 }
