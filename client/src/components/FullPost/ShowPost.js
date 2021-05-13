@@ -1,17 +1,42 @@
 import React, { useState } from 'react'
-import { BookmarkCheckFill, BookmarkDash, HandThumbsUp, HandThumbsUpFill } from 'react-bootstrap-icons';
+import { 
+    BookmarkCheckFill, 
+    BookmarkDash, 
+    HandThumbsUp, 
+    HandThumbsUpFill,
+    Chat,
+} from 'react-bootstrap-icons'
+import {OverlayTrigger, Tooltip} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import "./ShowPost.css"
 
-const ShowPost = ({ fullPostData }) => {
+const ShowPost = ({ fullPostData, userId }) => {
+    // States
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
 
-    const handleBookmarkChange = () => {setIsBookmarked(!isBookmarked)}
-    const handleLikedChange = () => {setIsLiked(!isLiked)}
+    const userProfileUrl = `/user/profile/${userId}`;
+
+    // Functions
+    const handleBookmarkChange = () => setIsBookmarked(!isBookmarked);
+    const handleLikedChange = () => setIsLiked(!isLiked)
+    const showToolTip = (icon, toolTip) => {
+        return (
+            <OverlayTrigger
+            placement="top"
+            overlay={
+                <Tooltip>{toolTip}</Tooltip>
+            }>
+                {icon}
+            </OverlayTrigger>
+        )
+    }
 
     return (
         <div className="mb-4">
-            <h1 className="display-4 text-capitalize">{fullPostData.postData.post.title}</h1>
+            <h1 className="display-4 text-capitalize">
+                {fullPostData.postData.post.title}
+            </h1>
             <div className="image mb-3">
                 {/* todo - set post image */}
                 {/* <p>image: {fullPostData.postData.post.image.img}</p>
@@ -19,7 +44,11 @@ const ShowPost = ({ fullPostData }) => {
             </div>
 
             <div className="text-muted author-date">
-                <p className="text-capitalize">By- {fullPostData.author}</p>
+                <p className="text-capitalize">
+                    by- <Link to={userProfileUrl} className="fullProfileLink text-muted text-underline">
+                        {fullPostData.author}
+                    </Link>
+                </p>
                 <p>
                     {
                         fullPostData.postData.editedOn ? 
@@ -33,35 +62,37 @@ const ShowPost = ({ fullPostData }) => {
                 {fullPostData.postData.post.content}
             </p>
 
-            <div className="like-bookmark">
+            <div className="icons">
                 <div className="like mr-4">
-                        <span 
-                        className="like-icon mr-1" 
-                        style={{"cursor": "pointer"}} 
-                        onClick={handleLikedChange}>
-                            {
-                                isLiked ? 
-                                <HandThumbsUpFill
-                                size={25} /> :
-                                <HandThumbsUp 
-                                size={25} />
-                            }
-                        </span>
-                        {fullPostData.postData.likes}
-                    </div>
+                    <span 
+                    className="like-icon mr-1" 
+                    style={{"cursor": "pointer"}} 
+                    onClick={handleLikedChange}>
+                        {
+                            isLiked ? 
+                            showToolTip(<HandThumbsUpFill size={25} />, "liked") :
+                            showToolTip(<HandThumbsUp size={25} />, "like")
+                        }
+                    </span>
+                    {fullPostData.postData.likes}
+                </div>
 
                 <div className="bookmark" 
                 style={{"cursor": "pointer"}} 
+                className="mr-4"
                 onClick={handleBookmarkChange}>
                     <span className="bookmark-icon">
                         {
                             isBookmarked ? 
-                            <BookmarkCheckFill
-                            size={25} /> :
-                            <BookmarkDash 
-                            size={25} />
+                            showToolTip(<BookmarkCheckFill size={25} />, "Bookmarked") :
+                            showToolTip(<BookmarkDash size={25} />, "Bookmark")
                         }
                     </span>
+                </div>
+                
+                <div className="chat" 
+                style={{"cursor": "pointer"}} >
+                    <span>{showToolTip(<Chat size={25} />, "Comment")}</span>
                 </div>
             </div>
 
