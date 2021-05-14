@@ -28,7 +28,9 @@ const User = () => {
         <PageLoader /> :
         <div className="container">
             {/* show userDetails */}
-            <h1 className="display-4">{userData.name}</h1>
+            <h1 className="display-4 text-capitalize">
+                {userData.name}
+            </h1>
             <p>following: {JSON.stringify(userData.following.length)}</p>
             <p>followers: {JSON.stringify(userData.followers.length)}</p>
             {/* <p>{JSON.stringify(userData.profileImg)}</p> */}

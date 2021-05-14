@@ -30,8 +30,8 @@ const PostCard = ({ author, postData, authorId }) => {
                         <div className="post-title">
                             {showBrief(postData.post.title, 50)}
                         </div>
-                        <div className="post-author text-muted">
-                            <small>By- {author}</small>
+                        <div className="post-author text-muted text-capitalize">
+                            <small>by- {author}</small>
                         </div>
                         <div className="post-brief-content">
                             {showBrief(postData.post.content, 70)}
