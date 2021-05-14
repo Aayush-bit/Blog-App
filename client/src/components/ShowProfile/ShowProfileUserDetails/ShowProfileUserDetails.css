@@ -1,0 +1,44 @@
+.ShowProfileUserDetails {
+    min-height: 35vh;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.116);
+    display: grid;
+    grid-template-rows: 1fr .5fr .3fr;
+    grid-template-columns: 2fr 3fr;
+    grid-template-areas: 
+    "profileImage followersFollowing"
+    "profileImage bio"
+    "profileImage follow";
+}
+
+.profile-image {
+    height: 100%;
+    width: 100%;
+    background: rgb(228, 228, 228);
+    grid-area: profileImage;
+}
+
+.followers-following {
+    display: flex;
+    justify-content: space-evenly;
+    grid-area: followersFollowing;
+}
+
+.bio {
+    grid-area: bio;
+}
+
+.follow {
+    grid-area: follow;   
+    padding: 0 1rem 1rem 1rem;
+}
+
+.followers-following, .email, .bio {
+    padding: 1rem;
+}
+
+.followers, .following {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
