@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 
 import PageLoader from '../../components/PageLoader'
 import ShowProfilePosts from '../../components/ShowProfile/ShowProfilePosts'
+import ShowProfileUserDetails from '../../components/ShowProfile/ShowProfileUserDetails/ShowProfileUserDetails'
 
 const User = () => {
     const { userId } = useParams();
@@ -27,16 +28,17 @@ const User = () => {
         isLoading ? 
         <PageLoader /> :
         <div className="container">
-            {/* show userDetails */}
             <h1 className="display-4 text-capitalize">
                 {userData.name}
             </h1>
-            <p>following: {JSON.stringify(userData.following.length)}</p>
-            <p>followers: {JSON.stringify(userData.followers.length)}</p>
-            {/* <p>{JSON.stringify(userData.profileImg)}</p> */}
-            <p>Bio: {JSON.stringify(userData.bio)}</p>
-            <p>{JSON.stringify(userData.email)}</p>
-
+            
+            {/* user profile details */}
+            <ShowProfileUserDetails 
+            profileImg={userData.profileImg}
+            following={userData.following}
+            followers={userData.followers}
+            bio={userData.bio} />
+            
             <hr />
 
             {/* user's posts */}
