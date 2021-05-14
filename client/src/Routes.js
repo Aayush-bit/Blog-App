@@ -13,6 +13,7 @@ import Profile from './pages/private/profilePage/Profile'
 import MyPosts from './pages/private/MyPosts/MyPosts'
 import CreatePost from './pages/private/CreatePost/CreatePost'
 import EditPost from './pages/private/EditPost/EditPost'
+import EditProfile from './pages/private/EditProfilePage/EditProfilePage'
 
 
 // common 
@@ -71,6 +72,9 @@ function Routes() {
             </Route>
             <Route exact path={ '/user/profile/:userId' }>
                 <User/>
+            </Route>
+            <Route exact path={ '/myprofile/edit' }>
+                <EditProfile />
             </Route>
             <Route exact path={'/myposts'} component={ MyPosts } />
             <Route exact path={'/post/create'} component={ CreatePost } />
