@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import {Form, Button} from 'react-bootstrap'
 
-const EditProfileForm = ({setNewInfo, setSubmitStatus}) => {
-    const [newUserName, setNewUserName] = useState("")
-    const [newBio, setNewBio] = useState("");
+const EditProfileForm = ({oldInfo, setNewInfo, submitStatus, setSubmitStatus}) => {
+    const [newUserName, setNewUserName] = useState(oldInfo.name);
+    const [newBio, setNewBio] = useState(oldInfo.bio);
 
     const handleFormSubmit = (e) => {
-        setNewInfo({"username": newUserName, "bio": newBio});
+        setNewInfo({"name": newUserName, "bio": newBio});
         setSubmitStatus(true);
         e.preventDefault();
     }
@@ -20,7 +20,8 @@ const EditProfileForm = ({setNewInfo, setSubmitStatus}) => {
                     type="text" 
                     value={newUserName}
                     onChange={(e) => setNewUserName(e.target.value)}
-                    placeholder="Enter New Username" />
+                    placeholder="Enter New Username" 
+                    required />
                 </Form.Group>
 
                 <Form.Group>
@@ -32,9 +33,15 @@ const EditProfileForm = ({setNewInfo, setSubmitStatus}) => {
                     placeholder="Enter New Bio" />
                 </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+            {
+                    submitStatus ?
+                    <Button variant="primary" type="submit" disabled>
+                        Please Wait...
+                    </Button> :
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+            }
             </Form>
         </div>
     )
