@@ -56,6 +56,30 @@ Router.get('/profile/:userId', (req, res) => {
     .then(data => res.json(data))
     .catch(err => res.send(err));
 });
+
+Router.get('/myprofile/:userId', (req, res) => {
+    const userId = req.params.userId;
+    User.aggregate([
+        {
+            $lookup: {
+                from: "posts",
+                localField: "_id",
+                foreignField: "_id",
+                as: "postsData"
+            }
+        },
+        {
+            $match: { _id: new mongoose.Types.ObjectId(userId) }
+        },
+        {
+            $project: {password: 0}
+        },
+    ])
+    .then((data) => res.json(data))
+    .catch(err => res.send(err));
+    
+    // res.status(200).send(userId);
+})
 // **************************************
 
 
