@@ -14,7 +14,6 @@ const Profile = () => {
     
     const url = `/api/users/myprofile/${cookies.userId}`;
 
-    // todo make request to get the posts posted by the user
     useEffect(() => {
         axios.get(url)
         .then(res => {
