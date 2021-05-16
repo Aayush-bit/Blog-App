@@ -1,5 +1,6 @@
 const Router = require("express").Router();
 const Post = require("../../model/post");
+const User = require("../../model/user");
 const authToken = require("../api/authToken");
 
 // get posts data of a particular user filtered by id
@@ -50,7 +51,7 @@ Router.get('/:userId/:postId', (req, res) => {
     .catch(err => res.status(500).send(err))
 })
 
-
+// ************ POST requests ************
 // add a new post
 // the following is the json request format in the body
 // {
@@ -81,6 +82,30 @@ Router.post('/:id', authToken, (req, res) => {
     .then(() => res.status(200).json({posted: true}))
     .catch(err => res.status(500).send(err));
 });
+
+// to bookmark or unbookmark a post 
+// bookmark when query 'mark' is true
+// unbookmark when query 'mark' is false
+Router.post('/bookmark/:userId/:postId', (req, res) => {
+    const userId = req.params.userId;
+    const postId = req.params.postId;
+    const mark = (req.query.mark === 'true') ? true : false;
+
+    if (mark === true) {
+        // bookmark the post
+        User.updateOne({_id: userId}, {$push: {bookmarks: postId}})
+        .then(data => {res.json(data)})
+        .catch(err => res.status(500).send(err));
+    }
+
+    if (mark === false) {
+        // unbookmark the post
+        User.updateOne({_id: userId}, {$pull: {bookmarks: postId}})
+        .then(data => {res.json(data)})
+        .catch(err => res.status(500).send(err));
+    }
+})
+// **************************************
 
 
 // ************ PUT requests ************
