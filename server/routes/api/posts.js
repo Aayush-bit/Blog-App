@@ -86,22 +86,22 @@ Router.post('/:id', authToken, (req, res) => {
 // to bookmark or unbookmark a post 
 // bookmark when query 'mark' is true
 // unbookmark when query 'mark' is false
-Router.post('/bookmark/:userId/:postId', (req, res) => {
+Router.post('/bookmark/:userId/:postId', authToken, (req, res) => {
     const userId = req.params.userId;
     const postId = req.params.postId;
     const mark = (req.query.mark === 'true') ? true : false;
 
-    if (mark === true) {
+    if (mark) {
         // bookmark the post
         User.updateOne({_id: userId}, {$push: {bookmarks: postId}})
-        .then(data => {res.json(data)})
+        .then(() => res.json({isBookmarked: true}))
         .catch(err => res.status(500).send(err));
     }
 
-    if (mark === false) {
+    if (!mark) {
         // unbookmark the post
         User.updateOne({_id: userId}, {$pull: {bookmarks: postId}})
-        .then(data => {res.json(data)})
+        .then(() => res.json({isUnbookmarked: true}))
         .catch(err => res.status(500).send(err));
     }
 })
