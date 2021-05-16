@@ -101,7 +101,7 @@ Router.post('/bookmark/:userId/:postId', authToken, (req, res) => {
     if (!mark) {
         // unbookmark the post
         User.updateOne({_id: userId}, {$pull: {bookmarks: postId}})
-        .then(() => res.json({isUnbookmarked: true}))
+        .then(() => res.json({isBookmarked: false}))
         .catch(err => res.status(500).send(err));
     }
 })
@@ -150,5 +150,13 @@ Router.put('/edit/:userId/:postId', authToken, (req, res) => {
 });
 // **************************************
 
+// ************ DELETE requests ************
+Router.delete('/:userId/:postId', (req, res) => {
+    const userId = req.params.userId;
+    const postId = req.params.postId;
+
+    res.json({userId, postId});
+})
+// **************************************
 
 module.exports = Router;
