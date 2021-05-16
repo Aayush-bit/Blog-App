@@ -4,6 +4,7 @@ import axios from 'axios'
 import PageLoader from '../../../components/PageLoader'
 import PostCard from '../../../components/postsPage/PostCard'
 import NoPostsPresent  from './NoPostsPresent'
+import ShowProfilePosts from '../../../components/ShowProfile/ShowProfilePosts'
 
 const MyPosts = () => {
     const [myPosts, setMyPosts] = useState([]);
@@ -28,10 +29,15 @@ const MyPosts = () => {
                 isLoading ? 
                 <PageLoader/> :
                 (Object.entries(myPosts.posts).length === 0) ? <NoPostsPresent /> : 
-                myPosts.posts.map((postData, index) => <PostCard author={myPosts.author} postData={postData} authorId={myPosts._id} key={index} />)
-            }
+                <ShowProfilePosts 
+                author={myPosts.author} 
+                authorId={myPosts._id} 
+                posts={myPosts.posts} />
+            } 
         </div>
     )
 }
+
+// author, authorId, posts
 
 export default MyPosts
