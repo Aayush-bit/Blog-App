@@ -151,6 +151,7 @@ Router.put('/edit/:userId/:postId', authToken, (req, res) => {
 // **************************************
 
 // ************ DELETE requests ************
+// todo - delete a post
 Router.delete('/:userId/:postId', (req, res) => {
     const userId = req.params.userId;
     const postId = req.params.postId;
