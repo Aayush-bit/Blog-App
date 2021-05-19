@@ -1,20 +1,25 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
-import { Form, Button, Alert } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
+
 import { LoggedInContext } from '../../App'
+import LoginForm from "../../components/Login/LoginForm"
 
 function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [data, setData] = useState({})
     const [err, setErr] = useState()
-    const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
+    const [setLoggedIn] = useContext(LoggedInContext)
     const history = useHistory();
 
     useEffect(() => {
-        if(email !== '' && password !== '') {
+        // whether data is empty or not
+        if(JSON.stringify(data)!==JSON.stringify({})) {
+
             const url = '/auth/login';
+
             axios.post(url, data)
             .then(res => {
                 setLoggedIn(res.data.loggedIn)
@@ -35,39 +40,15 @@ function Login() {
         }
     }, [data])
     
-    const handleLoginSubmit = (e) => {
-        setData({ email, password });
-        e.preventDefault();
-    }
-    
     return (
         <div className="container">
             <h1 className="display-4 mb-3">Login</h1>
-            <Form method="POST" onSubmit={handleLoginSubmit}>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control 
-                    type="email" 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter email"
-                    required />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control 
-                    type="password" 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                    required />
-                </Form.Group>
-
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+            <LoginForm 
+            email={email} 
+            setEmail={setEmail} 
+            password={password} 
+            setPassword={setPassword} 
+            setData={setData} />
             <hr/>
             <p className="text-muted">
                 Create a new account! <Link to='/signup'>Sign Up</Link>
