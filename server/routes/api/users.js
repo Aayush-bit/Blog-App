@@ -1,7 +1,7 @@
 const Router = require("express").Router();
-const jwt = require('jsonwebtoken');
 const User = require("../../model/user");
 const Post = require("../../model/post");
+const isAuthorAuth = require("./authAuthor")
 const mongoose = require('mongoose');
 
 // ************ GET requests ************
@@ -15,24 +15,19 @@ Router.get('/', (req, res) => {
 // to get information of a particular user filtering by _id
 Router.get('/:id', (req, res) => {
     const userId = req.params.id;
-
-    // check whether the user is the author 
     const accessToken = req.cookies.accessToken;
-    if (accessToken) {
-        jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-            if(user.id === userId) {
-                // when the user is the author
-                User.findOne({ _id: userId }, { password: 0 })
-                .then(user => res.status(200).send(user))
-                .catch(err => res.status(500).send(err));            
-            }
-        })
+    
+    // check whether the user is the author 
+    if(accessToken && isAuthorAuth(accessToken, userId)) {
+        User.findOne({ _id: userId }, { password: 0 })
+        .then(user => res.status(200).send(user))
+        .catch(err => res.status(500).send(err));
     }
 
     // the user is not the author
     User.findOne({ _id: userId }, { password: 0, bookmarks: 0, postsLiked: 0 })
     .then(user => res.status(200).send(user))
-    .catch(err => res.status(500).send(err));
+    .catch(err => res.status(500).send(err));    
 });
 
 Router.get('/profile/:userId', (req, res) => {
@@ -57,6 +52,7 @@ Router.get('/profile/:userId', (req, res) => {
     .catch(err => res.send(err));
 });
 
+// request for data to be sent on my profile page
 Router.get('/myprofile/:userId', (req, res) => {
     const userId = req.params.userId;
     User.aggregate([
