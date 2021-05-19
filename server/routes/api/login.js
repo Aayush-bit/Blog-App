@@ -30,7 +30,7 @@ Router.post('/', checkData, (req, res) => {
                 res.cookie('refreshToken', refreshToken, { httpOnly: true });
                 res.cookie('userId', match.id, { httpOnly: false });
 
-                res.json({ loggedIn: true });
+                res.status(200).json({ loggedIn: true });
             } else {
                 res.status(401).send('Incorrect password')
             }
