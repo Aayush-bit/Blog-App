@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 
-const Login = ({ email, setEmail, password, setPassword, setData }) => {
-    // const [email, setEmail] = useState('')
-    // const [password, setPassword] = useState('')
-
+const Login = ({ email, setEmail, password, setPassword, submitStatus, setSubmitStatus, setData }) => {
     const handleLoginSubmit = (e) => {
         setData({ email, password });
+        setSubmitStatus(true);
         e.preventDefault();
     }
 
@@ -32,10 +30,15 @@ const Login = ({ email, setEmail, password, setPassword, setData }) => {
                     placeholder="Password"
                     required />
                 </Form.Group>
-
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
+                {
+                    submitStatus ?
+                    <Button variant="primary" type="submit" disabled>
+                        Please Wait...
+                    </Button> :
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+                }
             </Form>
         </div>
     )

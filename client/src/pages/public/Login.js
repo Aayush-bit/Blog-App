@@ -11,13 +11,13 @@ function Login() {
     const [password, setPassword] = useState('')
     const [data, setData] = useState({})
     const [err, setErr] = useState()
-    const [setLoggedIn] = useContext(LoggedInContext)
+    const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
+    const [submitStatus, setSubmitStatus] = useState(false);
     const history = useHistory();
 
     useEffect(() => {
         // whether data is empty or not
-        if(JSON.stringify(data)!==JSON.stringify({})) {
-
+        if(submitStatus) {
             const url = '/auth/login';
 
             axios.post(url, data)
@@ -36,9 +36,10 @@ function Login() {
                 if(resErr.response.status === 404) {
                     setEmail('');
                 }
+                setSubmitStatus(false);
             })
         }
-    }, [data])
+    }, [submitStatus]);
     
     return (
         <div className="container">
@@ -48,8 +49,11 @@ function Login() {
             setEmail={setEmail} 
             password={password} 
             setPassword={setPassword} 
+            submitStatus={submitStatus}
+            setSubmitStatus={setSubmitStatus}
             setData={setData} />
             <hr/>
+            
             <p className="text-muted">
                 Create a new account! <Link to='/signup'>Sign Up</Link>
             </p>
