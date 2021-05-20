@@ -1,9 +1,12 @@
 import React from 'react'
 import {Button} from 'react-bootstrap'
+import { useHistory } from "react-router-dom"
 
 import './ShowProfileUserDetails.css'
 
 const ShowProfileUserDetails = ({ profileImg, following, followers, bio, isAuthor }) => {
+    const history = useHistory();
+    
     return (
         <>
             <div className="ShowProfileUserDetails">
@@ -43,6 +46,7 @@ const ShowProfileUserDetails = ({ profileImg, following, followers, bio, isAutho
                             <Button variant="info" 
                             className="edit" 
                             size="lg" 
+                            onClick={() => history.push(`/myprofile/edit`)}
                             block>
                                 Edit
                             </Button>
