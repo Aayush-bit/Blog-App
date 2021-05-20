@@ -1,8 +1,11 @@
 const Router = require("express").Router();
+const mongoose = require('mongoose');
+
 const User = require("../../model/user");
 const Post = require("../../model/post");
-const isAuthorAuth = require("./authAuthor")
-const mongoose = require('mongoose');
+
+const isAuthorAuth = require("./authAuthor");
+const authToken = require("./authToken");
 
 // ************ GET requests ************
 // to get all the users
@@ -30,6 +33,7 @@ Router.get('/:id', (req, res) => {
     .catch(err => res.status(500).send(err));    
 });
 
+// request for the data of a particular user and his/her posts
 Router.get('/profile/:userId', (req, res) => {
     const userId = req.params.userId;
     User.aggregate([
@@ -53,7 +57,8 @@ Router.get('/profile/:userId', (req, res) => {
 });
 
 // request for data to be sent on my profile page
-Router.get('/myprofile/:userId', (req, res) => {
+Router.get('/myprofile/:userId', authToken, (req, res) => {
+    // todo - reconsider putting the following code in '/profile/:userId'(GET) endpoint using 'isAuthorAuth'
     const userId = req.params.userId;
     User.aggregate([
         {
@@ -73,15 +78,13 @@ Router.get('/myprofile/:userId', (req, res) => {
     ])
     .then((data) => res.json(data))
     .catch(err => res.send(err));
-    
-    // res.status(200).send(userId);
 })
 // **************************************
 
 
 // ************ PUT requests ************
 // to update information of a particular user
-Router.put('/:id', (req, res) => {
+Router.put('/:id', authToken, (req, res) => {
     const userId = req.params.id;
     const newInfo = req.body;
 
@@ -93,7 +96,6 @@ Router.put('/:id', (req, res) => {
 
 
 // ************ DELETE requests ************
-
 const deleteUser = (req, res, next) => {
     User.findOneAndDelete({ _id: req.params.id })
     .then(() => res.status(200))
@@ -107,7 +109,7 @@ const deletePostAccount = (req, res, next) => {
     next();
 };
 
-Router.delete('/:id', deleteUser, deletePostAccount, (req, res) => {
+Router.delete('/:id', authToken, deleteUser, deletePostAccount, (req, res) => {
     res.status(200).json([{ userDeleted: true }, { postAccountDeleted: true }]);
 });
 // *****************************************
