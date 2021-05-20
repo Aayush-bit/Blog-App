@@ -37,7 +37,8 @@ const Profile = () => {
             profileImg={userData.profileImg}
             following={userData.following}
             followers={userData.followers}
-            bio={userData.bio} />
+            bio={userData.bio} 
+            isAuthor={true} />
             
             <hr />
 

@@ -3,7 +3,7 @@ import {Button} from 'react-bootstrap'
 
 import './ShowProfileUserDetails.css'
 
-const ShowProfileUserDetails = ({profileImg, following, followers, bio}) => {
+const ShowProfileUserDetails = ({ profileImg, following, followers, bio, isAuthor }) => {
     return (
         <>
             <div className="ShowProfileUserDetails">
@@ -35,12 +35,33 @@ const ShowProfileUserDetails = ({profileImg, following, followers, bio}) => {
                         </p>
                     }
                 </div>
-                <div className="follow">
-                    <Button variant="primary" size="lg" block>
-                        Follow
-                    </Button>
-                </div>
+                
+                <div className="required-btns">
+                    {
+                        isAuthor ? 
+                        <div className="edit-delete">
+                            <Button variant="info" 
+                            className="edit" 
+                            size="lg" 
+                            block>
+                                Edit
+                            </Button>
 
+                            <Button 
+                            variant="outline-danger" 
+                            className="delete" 
+                            size="lg" 
+                            block>
+                                Delete
+                            </Button>                        
+                        </div> :
+                        <div className="follow">
+                            <Button variant="primary" size="lg" block>
+                                Follow
+                            </Button>
+                        </div>
+                    }
+                </div>
             </div>
         </>
     )
