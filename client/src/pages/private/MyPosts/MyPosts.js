@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useCookies } from 'react-cookie'
 import axios from 'axios'
 import PageLoader from '../../../components/PageLoader'
-import PostCard from '../../../components/postsPage/PostCard'
+import CreatePostIcon from '../../../components/CreatePostIcon/CreatePostIcon'
 import NoPostsPresent  from './NoPostsPresent'
 import ShowProfilePosts from '../../../components/ShowProfile/ShowProfilePosts'
 
@@ -28,16 +28,16 @@ const MyPosts = () => {
             {
                 isLoading ? 
                 <PageLoader/> :
-                (Object.entries(myPosts.posts).length === 0) ? <NoPostsPresent /> : 
+                (Object.entries(myPosts.posts).length === 0) ? 
+                <NoPostsPresent /> : 
                 <ShowProfilePosts 
                 author={myPosts.author} 
                 authorId={myPosts._id} 
                 posts={myPosts.posts} />
             } 
+            <CreatePostIcon />
         </div>
     )
 }
-
-// author, authorId, posts
 
 export default MyPosts

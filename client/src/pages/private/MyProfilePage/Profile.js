@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import PageLoader from "../../../components/PageLoader"
 import { useCookies } from 'react-cookie'
+
+import CreatePostIcon from '../../../components/CreatePostIcon/CreatePostIcon'
+import PageLoader from "../../../components/PageLoader"
 import ShowProfilePosts from '../../../components/ShowProfile/ShowProfilePosts'
 import ShowProfileUserDetails from '../../../components/ShowProfile/ShowProfileUserDetails/ShowProfileUserDetails'
 
@@ -25,30 +27,34 @@ const Profile = () => {
     }, []);
 
     return (
-        isLoading ? 
-        <PageLoader /> :
-        <div className="container">
-            <h1 className="display-4 text-capitalize">
-                {userData.name}
-            </h1>
-            
-            {/* user profile details */}
-            <ShowProfileUserDetails 
-            profileImg={userData.profileImg}
-            following={userData.following}
-            followers={userData.followers}
-            bio={userData.bio} 
-            isAuthor={true} />
-            
-            <hr />
+        <>
+            {
+                isLoading ? 
+                <PageLoader /> :
+                <div className="container">
+                    <h1 className="display-4 text-capitalize">
+                        {userData.name}
+                    </h1>
+                    
+                    {/* user profile details */}
+                    <ShowProfileUserDetails 
+                    profileImg={userData.profileImg}
+                    following={userData.following}
+                    followers={userData.followers}
+                    bio={userData.bio} 
+                    isAuthor={true} />
+                    
+                    <hr />
 
-            {/* user's posts */}
-            <ShowProfilePosts 
-            author={userData.name} 
-            authorId= {userData._id}
-            posts={posts} />
-        </div>
-
+                    {/* user's posts */}
+                    <ShowProfilePosts 
+                    author={userData.name} 
+                    authorId= {userData._id}
+                    posts={posts} />
+                </div>
+            }
+            <CreatePostIcon />
+        </>
     )
 }
 
