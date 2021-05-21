@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAEA,AAAA,gBAAgB,CAAC,CAAC,CAAC;EACf,KAAK,EAHG,OAAkB;CAI7B;;AAED,AAAA,gBAAgB,CAAC,CAAC,AAAA,MAAM,CAAC;EACrB,KAAK,EAPG,OAAkB;EAQ1B,eAAe,EAAE,IAAI;CACxB;;AAED,AAAA,cAAc,CAAC;EACX,MAAM,EAAE,OAAO;CAClB",
-    "sources": [
-        "StickyTopNavbar.scss"
-    ],
-    "names": [],
-    "file": "StickyTopNavbar.css"
-}
