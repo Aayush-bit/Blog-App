@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useCookies } from 'react-cookie'
+import { Link } from 'react-router-dom'
 
 import CreatePostIcon from '../../../components/CreatePostIcon/CreatePostIcon'
 import PageLoader from "../../../components/PageLoader"
@@ -51,6 +52,12 @@ const Profile = () => {
                     author={userData.name} 
                     authorId= {userData._id}
                     posts={posts} />
+
+                    <Link 
+                    to="/myposts" 
+                    className="text-capitalize">
+                        see all posts...
+                    </Link>
                 </div>
             }
             <CreatePostIcon />
