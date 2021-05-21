@@ -4,9 +4,18 @@ import {Form, Button} from 'react-bootstrap'
 const EditProfileForm = ({oldInfo, setNewInfo, submitStatus, setSubmitStatus}) => {
     const [newUserName, setNewUserName] = useState(oldInfo.name);
     const [newBio, setNewBio] = useState(oldInfo.bio);
+    const [newProfileImg, setNewProfileImg] = useState(oldInfo.profileImg);
 
     const handleFormSubmit = (e) => {
-        setNewInfo({"name": newUserName, "bio": newBio});
+        // set new info to update the old one
+        setNewInfo(
+            {
+                "profileImg": newProfileImg,
+                "name": newUserName, 
+                "bio": newBio
+            }
+        );
+
         setSubmitStatus(true);
         e.preventDefault();
     }
@@ -14,6 +23,16 @@ const EditProfileForm = ({oldInfo, setNewInfo, submitStatus, setSubmitStatus}) =
     return (
         <div>
             <Form onSubmit={handleFormSubmit}>
+                <Form.Group>
+                    <Form.Label>Profile Image</Form.Label>
+                    <Form.Control 
+                    type="text" 
+                    value={newProfileImg}
+                    onChange={(e) => setNewProfileImg(e.target.value)}
+                    placeholder="Your Cool Profile Image" 
+                    required />
+                </Form.Group>
+                
                 <Form.Group>
                     <Form.Label>Username</Form.Label>
                     <Form.Control 
