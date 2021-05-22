@@ -1,15 +1,49 @@
-import React from 'react'
-import {Button} from 'react-bootstrap'
+import React, { useState } from 'react'
+import {Button, Modal} from 'react-bootstrap'
 import { useHistory } from "react-router-dom"
 
 import './ShowProfileUserDetails.css'
 
 const ShowProfileUserDetails = ({ profileImg, following, followers, bio, isAuthor }) => {
     const history = useHistory();
-    
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const deleteAlert = () => {
+        return (
+            <Modal
+            show={show}
+            size="lg"
+            onHide={handleClose}
+            backdrop="static"
+            keyboard={false}
+            centered>
+                <Modal.Header closeButton>
+                <Modal.Title className="text-capitalize">
+                    account deletion alert
+                </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete your account permanently?
+                    By further confirming to proceed deletion process you will loose your account and account details permanently.
+                    Please consider this before proceeding.
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    No
+                </Button>
+                <Button variant="danger">Yes, I know the consequences</Button>
+                </Modal.Footer>
+          </Modal>  
+        );
+    }
+
     return (
         <>
             <div className="ShowProfileUserDetails">
+                {deleteAlert()}
                 <div className="profile-image"></div>
                 <div className="followers-following">
                     <div className="following text-center">
@@ -55,6 +89,7 @@ const ShowProfileUserDetails = ({ profileImg, following, followers, bio, isAutho
                             variant="outline-danger" 
                             className="delete" 
                             size="lg" 
+                            onClick={handleShow}
                             block>
                                 Delete
                             </Button>                        
