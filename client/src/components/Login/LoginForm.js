@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Spinner } from 'react-bootstrap'
 
 const Login = ({ email, setEmail, password, setPassword, submitStatus, setSubmitStatus, setData }) => {
     const handleLoginSubmit = (e) => {
@@ -33,7 +33,12 @@ const Login = ({ email, setEmail, password, setPassword, submitStatus, setSubmit
                 {
                     submitStatus ?
                     <Button variant="primary" type="submit" disabled>
-                        Please Wait...
+                        <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true" /> Please Wait...
                     </Button> :
                     <Button variant="primary" type="submit">
                         Submit

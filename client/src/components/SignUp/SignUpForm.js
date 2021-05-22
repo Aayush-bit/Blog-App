@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Spinner } from 'react-bootstrap'
 
 const SignUpForm = ({setData, submitStatus, setSubmitStatus}) => {
     const [name, setName] = useState('')
@@ -50,7 +50,12 @@ const SignUpForm = ({setData, submitStatus, setSubmitStatus}) => {
                 {
                     submitStatus ?
                     <Button variant="primary" type="submit" disabled>
-                        Please Wait...
+                        <Spinner
+                        as="span"
+                        animation="border"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true" /> Please Wait...
                     </Button> :
                     <Button variant="primary" type="submit">
                         Submit
