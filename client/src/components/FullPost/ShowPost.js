@@ -6,14 +6,15 @@ import {
     HandThumbsUpFill,
     Chat
 } from 'react-bootstrap-icons'
-import {OverlayTrigger, Tooltip} from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import {OverlayTrigger, Tooltip, Button} from 'react-bootstrap'
+import { Link, useHistory } from 'react-router-dom'
 import "./ShowPost.css"
 
-const ShowPost = ({ fullPostData, userId }) => {
+const ShowPost = ({ isAuthor, fullPostData, userId }) => {
     // States
     const [isBookmarked, setIsBookmarked] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
+    const history = useHistory();
 
     const userProfileUrl = `/user/profile/${userId}`;
 
@@ -61,42 +62,54 @@ const ShowPost = ({ fullPostData, userId }) => {
             <p className="post-content">
                 {fullPostData.postData.post.content}
             </p>
+            
+            {
+                isAuthor ? 
+                <div>
+                    <Button 
+                    onClick={() => history.push(`/post/edit/${fullPostData.postData._id}`)}
+                    className="mr-3">
+                        Edit
+                    </Button>
+                    <Button variant="outline-danger">
+                        Delete
+                    </Button>
+                </div> :
 
-            <div className="icons">
-                <div className="like mr-4">
-                    <span 
-                    className="like-icon mr-1" 
+                <div className="icons">
+                    <div className="like mr-4">
+                        <span 
+                        className="like-icon mr-1" 
+                        style={{"cursor": "pointer"}} 
+                        onClick={handleLikedChange}>
+                            {
+                                isLiked ? 
+                                showToolTip(<HandThumbsUpFill size={25} />, "liked") :
+                                showToolTip(<HandThumbsUp size={25} />, "like")
+                            }
+                        </span>
+                        {fullPostData.postData.likes}
+                    </div>
+
+                    <div className="bookmark" 
                     style={{"cursor": "pointer"}} 
-                    onClick={handleLikedChange}>
-                        {
-                            isLiked ? 
-                            showToolTip(<HandThumbsUpFill size={25} />, "liked") :
-                            showToolTip(<HandThumbsUp size={25} />, "like")
-                        }
-                    </span>
-                    {fullPostData.postData.likes}
+                    className="mr-4"
+                    onClick={handleBookmarkChange}>
+                        <span className="bookmark-icon">
+                            {
+                                isBookmarked ? 
+                                showToolTip(<BookmarkCheckFill size={25} />, "Bookmarked") :
+                                showToolTip(<BookmarkDash size={25} />, "Bookmark")
+                            }
+                        </span>
+                    </div>
+                    
+                    <div className="chat" 
+                    style={{"cursor": "pointer"}} >
+                        <span>{showToolTip(<Chat size={25} />, "Comment")}</span>
+                    </div>
                 </div>
-
-                <div className="bookmark" 
-                style={{"cursor": "pointer"}} 
-                className="mr-4"
-                onClick={handleBookmarkChange}>
-                    <span className="bookmark-icon">
-                        {
-                            isBookmarked ? 
-                            showToolTip(<BookmarkCheckFill size={25} />, "Bookmarked") :
-                            showToolTip(<BookmarkDash size={25} />, "Bookmark")
-                        }
-                    </span>
-                </div>
-                
-                <div className="chat" 
-                style={{"cursor": "pointer"}} >
-                    <span>{showToolTip(<Chat size={25} />, "Comment")}</span>
-                </div>
-            </div>
-
-            {/* <p>id: {fullPostData.postData._id}</p> */}
+            }
         </div>
     )
 }
