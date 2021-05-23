@@ -4,7 +4,7 @@ import {
     BookmarkDash, 
     HandThumbsUp, 
     HandThumbsUpFill,
-    Chat,
+    Chat
 } from 'react-bootstrap-icons'
 import {OverlayTrigger, Tooltip} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
