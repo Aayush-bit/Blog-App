@@ -23,14 +23,9 @@ const EditPost = () => {
     
     useEffect(() => {
         axios.get(url)
-        .then((res) => {
-            setEditPostData(res.data);
-            setIsLoading(false);
-        })
-        .catch((resErr) => {
-            setError(resErr.response.status);
-            setIsLoading(false)
-        });
+        .then((res) => setEditPostData(res.data))
+        .catch((resErr) => setError(resErr.response.status))
+        .finally(() => setIsLoading(false));
     }, []);
 
     useEffect(() => {
@@ -63,7 +58,7 @@ const EditPost = () => {
         if(!dataEdited) {
             return (
                 <PostForm 
-                editPostData= {editPostData.postData} 
+                editPostData= {editPostData.requiredPost.postData} 
                 setPostData={setNewPostData} 
                 submitStatus={submitStatus}
                 setSubmitStatus={setSubmitStatus} />

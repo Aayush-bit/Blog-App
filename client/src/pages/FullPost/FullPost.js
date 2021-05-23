@@ -14,14 +14,9 @@ const FullPost = () => {
 
     useEffect(() => {
         axios.get(url)
-        .then(res => {
-            setFullPostData(res.data)
-            setIsLoading(false);
-        })
-        .catch(resErr => {
-            console.error(resErr)
-            setIsLoading(false);
-        });
+        .then(res => setFullPostData(res.data))
+        .catch(resErr => console.error(resErr))
+        .finally(() => setIsLoading(false));
     }, []);
 
     const showData = () => {
@@ -32,7 +27,12 @@ const FullPost = () => {
             // if(error !== undefined) {
             //     return <>Error</>
             // }
-            return <ShowPost fullPostData={fullPostData} userId={userId} />;
+            return (
+                <ShowPost 
+                isAuthor={fullPostData.isAuthor}
+                fullPostData={fullPostData.requiredPost} 
+                userId={userId} />
+            )
         }
     }
     
