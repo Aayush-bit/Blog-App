@@ -2,6 +2,7 @@ const Router = require("express").Router();
 const Post = require("../../model/post");
 const User = require("../../model/user");
 const authToken = require("../api/authToken");
+const isAuthorAuth = require("./authAuthor");
 
 // get posts data of a particular user filtered by id
 Router.get('/:id', (req, res) => {
@@ -23,7 +24,14 @@ Router.get('/', (req, res) => {
 Router.get('/:userId/:postId', (req, res) => {
     const userId = req.params.userId;
     const postId = req.params.postId;
+    const accessToken = req.cookies.accessToken;
 
+    let isAuthor = false;
+
+    if(accessToken !== undefined && isAuthorAuth(accessToken, userId)) {
+        isAuthor = true;
+    }
+    
     Post.findOne({ _id: userId })
     .then(userPosts => {
         let requiredPost = undefined;
@@ -46,7 +54,7 @@ Router.get('/:userId/:postId', (req, res) => {
         }
         
         // respond required post
-        res.status(200).json(requiredPost);
+        res.status(200).json({isAuthor, requiredPost});
     })
     .catch(err => res.status(500).send(err))
 })
