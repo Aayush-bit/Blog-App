@@ -159,12 +159,29 @@ Router.put('/edit/:userId/:postId', authToken, (req, res) => {
 // **************************************
 
 // ************ DELETE requests ************
-// todo - delete a post
 Router.delete('/:userId/:postId', (req, res) => {
     const userId = req.params.userId;
     const postId = req.params.postId;
 
-    res.json({userId, postId});
+    let reqdPosts = [];
+    
+    Post.findOne({_id: userId})
+    .then((userPosts) => {
+        let allPosts = userPosts.posts;
+
+        for (let i = 0; i < allPosts.length; i++) {
+            if(postId === userPosts.posts[i]._id.toString()) continue;
+            reqdPosts.push(allPosts[i]);
+        }
+
+        return reqdPosts;
+    })
+    .then(reqdPosts => {
+        Post.updateOne({ _id: userId }, { $set: { posts: reqdPosts } })
+        .then(() => res.status(200).json({message: "post deleted successfuly"}))
+        .catch(err => res.status(500).send(err));
+    })
+    .catch(err => res.status(500).send(err));
 })
 // **************************************
 
