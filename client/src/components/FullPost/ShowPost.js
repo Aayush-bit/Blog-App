@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap-icons'
 import {OverlayTrigger, Tooltip, Button} from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
+import axios from 'axios'
 import "./ShowPost.css"
 
 const ShowPost = ({ isAuthor, fullPostData, userId }) => {
@@ -21,6 +22,15 @@ const ShowPost = ({ isAuthor, fullPostData, userId }) => {
     // Functions
     const handleBookmarkChange = () => setIsBookmarked(!isBookmarked);
     const handleLikedChange = () => setIsLiked(!isLiked)
+
+    const deletePost = () => {
+        const postId = fullPostData.postData._id;
+        
+        axios.delete(`/api/posts/${userId}/${postId}`)
+        .then(() => history.push("/myprofile"))
+        .catch(resErr => console.error(resErr));
+    }
+    
     const showToolTip = (icon, toolTip) => {
         return (
             <OverlayTrigger
@@ -71,7 +81,7 @@ const ShowPost = ({ isAuthor, fullPostData, userId }) => {
                     className="mr-3">
                         Edit
                     </Button>
-                    <Button variant="outline-danger">
+                    <Button onClick={deletePost} variant="outline-danger">
                         Delete
                     </Button>
                 </div> :
