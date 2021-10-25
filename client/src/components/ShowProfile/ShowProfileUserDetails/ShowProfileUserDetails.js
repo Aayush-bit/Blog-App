@@ -1,15 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {Button, Modal} from 'react-bootstrap'
 import { useHistory } from "react-router-dom"
+import { useCookies } from 'react-cookie'
+import { LoggedInContext } from '../../../App'
+import axios from "axios"
 
 import './ShowProfileUserDetails.css'
 
 const ShowProfileUserDetails = ({ profileImg, following, followers, bio, isAuthor }) => {
     const history = useHistory();
     const [show, setShow] = useState(false);
+    const [cookies, setCookie, deleteCookie] = useCookies(['userId'])
+    const [loggedIn, setLoggedIn] = useContext(LoggedInContext)
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const deleteAccount = () => {
+        axios.delete(`/api/users/${cookies.userId}`)
+        .then(res => {
+            // send request to server to log the user out
+            axios.get('/logout')
+            .catch(err => console.error(err));
+
+            setLoggedIn(false);
+            // redirect to home page ( route: '/' )
+            history.push('/')
+        })
+    };
 
     const deleteAlert = () => {
         return (
@@ -34,7 +52,7 @@ const ShowProfileUserDetails = ({ profileImg, following, followers, bio, isAutho
                 <Button variant="secondary" onClick={handleClose}>
                     No
                 </Button>
-                <Button variant="danger">Yes, I know the consequences</Button>
+                <Button onClick={deleteAccount} variant="danger">Yes, I know the consequences!</Button>
                 </Modal.Footer>
           </Modal>  
         );
