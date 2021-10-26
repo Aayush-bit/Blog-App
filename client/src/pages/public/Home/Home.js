@@ -9,13 +9,16 @@ function Home() {
         <div className="home mb-4">
             {/* hero section */}
             <HeroSection />
-            <hr />
-            {/* about section */}
-            <AboutSection />
-            <hr />
-            {/* how to use the application */}
-            <Usage />
-            {/* purpose */}
+            
+            <div className="home__aboutSection">
+                {/* about section */}
+                <AboutSection />
+            </div>
+
+            <div className="home__usageSection">
+                {/* how to use the application */}
+                <Usage />
+            </div>
         </div>
     )
 }
