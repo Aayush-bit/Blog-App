@@ -20,12 +20,12 @@ const PostCard = ({ author, postData, authorId }) => {
         <React.Fragment>
             <div className="post">
                 <div className="box" onClick={showFullPost}>
-                    <div className="post-image">
+                    {/* <div className="post-image"> */}
                         {/* <img 
                         src={postData.post.image.img} 
                         alt={showBrief(postData.post.image.placeholder, 20)} 
                         className="image"/> */}
-                    </div>
+                    {/* </div> */}
                     <div className="post-card-content">
                         <div className="post-title">
                             {showBrief(postData.post.title, 50)}
@@ -34,16 +34,19 @@ const PostCard = ({ author, postData, authorId }) => {
                             <small>by- {author}</small>
                         </div>
                         <div className="post-brief-content">
-                            {showBrief(postData.post.content, 70)}
+                            {showBrief(postData.post.content, 200)}
+                            {/* {showBrief(postData.post.content, 70)} */}
                         </div>
                     </div>
                     <div className="post-info">
-                        <div className="post-likes">{postData.likes} likes</div>
+                        <div className="post-likes">
+                            {/* {postData.likes} likes */}
+                        </div>
                         <div className="post-date-time text-muted">
                             {
                                 postData.editedOn ? 
-                                postData.editedOn + " (edited)": 
-                                postData.postedOn
+                                postData.editedOn.split("T")[0] + " (edited)": 
+                                postData.postedOn.split("T")[0]
                             }
                         </div>
                     </div>
