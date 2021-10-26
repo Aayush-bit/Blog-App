@@ -92,40 +92,40 @@ const ShowPost = ({ isAuthor, fullPostData, userId }) => {
                         Delete
                     </Button>
                 </div> :
+                <></>
+                // <div className="icons">
+                //     <div className="like mr-4">
+                //         <span 
+                //         className="like-icon mr-1" 
+                //         style={{"cursor": "pointer"}} 
+                //         onClick={handleLikedChange}>
+                //             {
+                //                 isLiked ? 
+                //                 showToolTip(<HandThumbsUpFill size={25} />, "liked") :
+                //                 showToolTip(<HandThumbsUp size={25} />, "like")
+                //             }
+                //         </span>
+                //         {fullPostData.postData.likes}
+                //     </div>
 
-                <div className="icons">
-                    <div className="like mr-4">
-                        <span 
-                        className="like-icon mr-1" 
-                        style={{"cursor": "pointer"}} 
-                        onClick={handleLikedChange}>
-                            {
-                                isLiked ? 
-                                showToolTip(<HandThumbsUpFill size={25} />, "liked") :
-                                showToolTip(<HandThumbsUp size={25} />, "like")
-                            }
-                        </span>
-                        {fullPostData.postData.likes}
-                    </div>
-
-                    <div className="bookmark" 
-                    style={{"cursor": "pointer"}} 
-                    className="mr-4"
-                    onClick={handleBookmarkChange}>
-                        <span className="bookmark-icon">
-                            {
-                                isBookmarked ? 
-                                showToolTip(<BookmarkCheckFill size={25} />, "Bookmarked") :
-                                showToolTip(<BookmarkDash size={25} />, "Bookmark")
-                            }
-                        </span>
-                    </div>
+                //     <div className="bookmark" 
+                //     style={{"cursor": "pointer"}} 
+                //     className="mr-4"
+                //     onClick={handleBookmarkChange}>
+                //         <span className="bookmark-icon">
+                //             {
+                //                 isBookmarked ? 
+                //                 showToolTip(<BookmarkCheckFill size={25} />, "Bookmarked") :
+                //                 showToolTip(<BookmarkDash size={25} />, "Bookmark")
+                //             }
+                //         </span>
+                //     </div>
                     
-                    <div className="chat" 
-                    style={{"cursor": "pointer"}} >
-                        <span>{showToolTip(<Chat size={25} />, "Comment")}</span>
-                    </div>
-                </div>
+                //     <div className="chat" 
+                //     style={{"cursor": "pointer"}} >
+                //         <span>{showToolTip(<Chat size={25} />, "Comment")}</span>
+                //     </div>
+                // </div>
             }
         </div>
     )
