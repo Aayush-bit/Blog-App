@@ -48,11 +48,18 @@ const ShowPost = ({ isAuthor, fullPostData, userId }) => {
             <h1 className="display-4 text-capitalize">
                 {fullPostData.postData.post.title}
             </h1>
-            <div className="image mb-3">
-                {/* todo - set post image */}
-                {/* <p>image: {fullPostData.postData.post.image.img}</p>
-                <p>placeholder: {fullPostData.postData.post.image.placeholder}</p> */}
-            </div>
+            {
+                (fullPostData.postData.post.image.img === "") ? 
+                <></> :
+                <>
+                    <div className="image mb-3">
+                        {/* todo - set post image */}
+                        <img src={fullPostData.postData.post.image.img} className="showPost__image" alt={fullPostData.postData.post.image.placeholder} />
+
+                    </div>
+                </>
+            }
+
 
             <div className="text-muted author-date">
                 <p className="text-capitalize">
@@ -63,8 +70,8 @@ const ShowPost = ({ isAuthor, fullPostData, userId }) => {
                 <p>
                     {
                         fullPostData.postData.editedOn ? 
-                        fullPostData.postData.editedOn + " (edited)" :
-                        fullPostData.postData.postedOn
+                        fullPostData.postData.editedOn.split("T")[0] + " (edited)" :
+                        fullPostData.postData.postedOn.split("T")[0]
                     }
                 </p>
             </div>
