@@ -36,8 +36,9 @@ function UserCard({ userId, name, profileImg, email, bio }) {
                     <Card.Title>{name}</Card.Title>
                     <Card.Text>Email: {email}</Card.Text>
                     {bio ? <Card.Text className="text-muted">{bioBrief}</Card.Text> : null}
-                    <Button variant={followBtnVariant} onClick={handleFollowStatusChange}>{followBtnMessage}</Button>
-                    <Button variant="info" className="ml-3" onClick={redirectToUserProfile}>Profile</Button>
+                    {/* <Button variant={followBtnVariant} onClick={handleFollowStatusChange}>{followBtnMessage}</Button>
+                    <Button variant="info" className="ml-3" onClick={redirectToUserProfile}>Show Profile</Button> */}
+                    <Button variant="info" onClick={redirectToUserProfile}>Show Profile</Button>
                 </Card.Body>
             </Card>
         </div>

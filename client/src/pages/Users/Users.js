@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import {Row, Col, Container} from "react-bootstrap";
 import PageLoader from "../../components/PageLoader"
 import UserCard from "../../components/usersPage/UserCard"
 
@@ -25,16 +26,24 @@ function Users() {
             {
                 isLoading ? 
                 <PageLoader/> :
-                users.map((user, index) => (
-                    <React.Fragment key={index}>
-                        <UserCard 
-                        userId={user._id} 
-                        name={user.name} 
-                        profileImg={user.profileImg} 
-                        email={user.email} 
-                        bio={user.bio} />
-                    </React.Fragment>
-                ))
+                <>
+                    <Container>
+                        <Row>
+                        {
+                            users.map((user, index) => (
+                                <Col sm={4} key={index}>
+                                    <UserCard 
+                                    userId={user._id} 
+                                    name={user.name} 
+                                    profileImg={user.profileImg} 
+                                    email={user.email} 
+                                    bio={user.bio} />
+                                </Col>
+                            ))
+                        }
+                        </Row>
+                    </Container>
+                </>
             }
         </div>
     )
