@@ -1,0 +1,10 @@
+.heroSection {
+    display: flex;
+    height: 65vh;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.heroSection__image {
+    width: 45%;
+}
