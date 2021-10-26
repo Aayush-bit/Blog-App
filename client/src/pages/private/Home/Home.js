@@ -1,12 +1,11 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import CreatePostIcon from '../../../components/CreatePostIcon/CreatePostIcon'
 
 function Home() {
     return (
         <div className="container">
-            <h1 className="display-4">Private Home page</h1>
-            <Link to="/post/create">Create a post</Link><br/>
-            <Link to="/myposts">My Posts</Link><br/>
+            <h1 className="display-4">Dashboard</h1>
+            <CreatePostIcon />
         </div>
     )
 }
