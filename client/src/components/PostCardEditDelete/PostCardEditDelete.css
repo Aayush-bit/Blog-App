@@ -1,0 +1,16 @@
+.postCardEditDelete {
+    border: 1px solid;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.postCardEditDelete__actions {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.postCardEditDelete__action {
+    margin: 0 .4rem;
+    cursor: pointer;
+}
