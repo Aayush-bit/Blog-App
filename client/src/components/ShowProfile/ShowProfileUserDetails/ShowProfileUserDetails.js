@@ -7,7 +7,7 @@ import axios from "axios"
 
 import './ShowProfileUserDetails.css'
 
-const ShowProfileUserDetails = ({ profileImg, following, followers, bio, isAuthor }) => {
+const ShowProfileUserDetails = ({ username, email, numberOfPosts, profileImg, following, followers, bio, isAuthor }) => {
     const history = useHistory();
     const [show, setShow] = useState(false);
     const [cookies, setCookie, deleteCookie] = useCookies(['userId'])
@@ -63,7 +63,7 @@ const ShowProfileUserDetails = ({ profileImg, following, followers, bio, isAutho
             <div className="ShowProfileUserDetails">
                 {deleteAlert()}
                 <div className="profile-image"></div>
-                <div className="followers-following">
+                {/* <div className="followers-following">
                     <div className="following text-center">
                         <div className="display-4">{following.length}</div>
                         <div 
@@ -89,6 +89,17 @@ const ShowProfileUserDetails = ({ profileImg, following, followers, bio, isAutho
                             no bio
                         </p>
                     }
+                </div> */}
+
+                <div className="bio">
+                    <h1 className="text-capitalize">{username}</h1>
+                    <p>Bio: {bio}</p>
+                    <p>{email}</p>
+                    <p>{numberOfPosts} {" "}
+                    {
+                        (numberOfPosts === 1) ? <>post</> : <>posts</>
+                    }
+                    {" "} yet</p>
                 </div>
                 
                 <div className="required-btns">

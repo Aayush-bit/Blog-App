@@ -34,7 +34,7 @@ const Profile = () => {
                 <PageLoader /> :
                 <div className="container">
                     <h1 className="display-4 text-capitalize">
-                        {userData.name}
+                        {/* {userData.name} */}
                     </h1>
                     
                     {/* user profile details */}
@@ -43,6 +43,9 @@ const Profile = () => {
                     following={userData.following}
                     followers={userData.followers}
                     bio={userData.bio} 
+                    username={userData.name}
+                    email={userData.email}
+                    numberOfPosts={posts.length}
                     isAuthor={true} />
                     
                     <hr />
