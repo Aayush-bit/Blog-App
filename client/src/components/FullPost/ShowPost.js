@@ -27,7 +27,7 @@ const ShowPost = ({ isAuthor, fullPostData, userId }) => {
         const postId = fullPostData.postData._id;
         
         axios.delete(`/api/posts/${userId}/${postId}`)
-        .then(() => history.push("/myprofile"))
+        .then(() => history.push("/dashboard"))
         .catch(resErr => console.error(resErr));
     }
     
