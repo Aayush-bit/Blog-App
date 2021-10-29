@@ -10,12 +10,12 @@ const FullPost = () => {
     const url = `/api/posts/${userId}/${postId}`;
     const [fullPostData, setFullPostData] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    // const [error, setError] = useState();
+    const [error, setError] = useState();
 
     useEffect(() => {
         axios.get(url)
         .then(res => setFullPostData(res.data))
-        .catch(resErr => console.error(resErr))
+        .catch(resErr => setError(resErr))
         .finally(() => setIsLoading(false));
     }, []);
 
@@ -24,9 +24,9 @@ const FullPost = () => {
             return <PageLoader />
         }
         if(!isLoading) {
-            // if(error !== undefined) {
-            //     return <>Error</>
-            // }
+            if(error !== undefined) {
+                return <h1 className="text-center text-danger display-4">Error occured</h1>
+            }
             return (
                 <ShowPost 
                 isAuthor={fullPostData.isAuthor}
